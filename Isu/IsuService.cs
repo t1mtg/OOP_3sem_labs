@@ -48,9 +48,7 @@ namespace Isu
 
         public List<Student> FindStudents(CourseNumber courseNumber)
         {
-            return _listOfStudents.Where(student => int.Parse(student.Group.Name[2].ToString())
-                    .Equals(courseNumber.Number))
-                .ToList();
+            return _listOfStudents.Where(student => student.Group.CourseNumber.Equals(courseNumber.Number)).ToList();
         }
 
         public Group FindGroup(string groupName)
@@ -60,22 +58,16 @@ namespace Isu
 
         public List<Group> FindGroups(CourseNumber courseNumber)
         {
-            return _listOfGroups.Where(@group => int.Parse(@group.Name[2].ToString()).Equals(courseNumber.Number)).ToList();
+            return _listOfGroups.Where(@group => group.CourseNumber.Equals(courseNumber.Number)).ToList();
         }
 
         public void ChangeStudentGroup(Student student, Group newGroup)
         {
-            Group previousGroup = null;
-            foreach (Student st in _listOfStudents.Where(st => st == student))
-            {
-                previousGroup = st.Group;
-                st.Group = newGroup;
-            }
-
+            Group previousGroup = student.Group;
             if (previousGroup == null) return;
+            student.Group = newGroup;
             previousGroup.Students.Remove(student);
             newGroup.Students.Add(student);
-            student.Group = newGroup;
         }
     }
 }
