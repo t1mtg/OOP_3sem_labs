@@ -15,7 +15,7 @@
     <projectFile>Banks.Tests/Banks.Tests.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f29c5c5e-610f-487d-a8fc-5247522c3c78" name="Changes" comment="fix: change dotnet sdk">
+    <list default="true" id="f29c5c5e-610f-487d-a8fc-5247522c3c78" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -296,7 +296,9 @@
       <workItem from="1631454608206" duration="1978000" />
       <workItem from="1631456609536" duration="9980000" />
       <workItem from="1631558934668" duration="3868000" />
-      <workItem from="1631724540816" duration="1047000" />
+      <workItem from="1631724540816" duration="1648000" />
+      <workItem from="1631726282626" duration="414000" />
+      <workItem from="1631726855160" duration="299000" />
     </task>
     <task id="LOCAL-00001" summary="init_commit">
       <created>1631462902281</created>
@@ -319,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1631724746629</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix: dotnet sdk">
+      <created>1631725663121</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1631725663121</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,6 +366,7 @@
     <MESSAGE value="init_commit" />
     <MESSAGE value="fix1" />
     <MESSAGE value="fix: change dotnet sdk" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: change dotnet sdk" />
+    <MESSAGE value="fix: dotnet sdk" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: dotnet sdk" />
   </component>
 </project>
