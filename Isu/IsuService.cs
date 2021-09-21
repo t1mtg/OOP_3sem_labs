@@ -21,13 +21,13 @@ namespace Isu
         {
             if (@group.Students.Count >= Group.MaxAmountOfStudents)
             {
-                throw new IsuException($"Reached max amount of students in group {@group.Name}");
+                throw new ReachMaxAmountException();
             }
 
             var student = new Student(name);
             @group.Students.Add(student);
             _listOfStudents.Add(student);
-            student.Group = @group;
+            student.ChangeGroup(@group);
             return student;
         }
 
@@ -65,7 +65,7 @@ namespace Isu
         {
             Group previousGroup = student.Group;
             if (previousGroup == null) return;
-            student.Group = newGroup;
+            student.ChangeGroup(newGroup);
             previousGroup.Students.Remove(student);
             newGroup.Students.Add(student);
         }

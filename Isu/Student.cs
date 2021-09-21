@@ -13,6 +13,11 @@
 
         public string Name { get; }
         public int Id { get; }
-        public Group Group { get; set; }
+        public Group Group { get; private set; }
+
+        public void ChangeGroup(Group newGroup)
+        {
+            Group = newGroup;
+        }
     }
 }
