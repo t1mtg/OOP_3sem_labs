@@ -9,7 +9,7 @@ namespace Isu.Services
 
         Student GetStudent(int id);
         Student FindStudent(string name);
-        List<Student> FindStudents(string groupName);
+        IReadOnlyList<Student> FindStudents(string groupName);
         List<Student> FindStudents(CourseNumber courseNumber);
 
         Group FindGroup(string groupName);

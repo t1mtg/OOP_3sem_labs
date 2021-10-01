@@ -17,57 +17,49 @@ namespace Isu
             return newGroup;
         }
 
-        public Student AddStudent(Group @group, string name)
+        public Student AddStudent(Group group, string name)
         {
-            if (@group.Students.Count >= Group.MaxAmountOfStudents)
-            {
-                throw new ReachMaxAmountException();
-            }
-
-            var student = new Student(name);
-            @group.Students.Add(student);
+            Student student = Group.AddPerson(group, name);
             _listOfStudents.Add(student);
-            student.ChangeGroup(@group);
             return student;
         }
 
         public Student GetStudent(int id)
         {
+            if (_listOfStudents.FirstOrDefault(student => student.Id.Equals(id)) == null)
+            {
+                throw new StudentDoesNotExistException();
+            }
+
             return _listOfStudents.First(student => student.Id.Equals(id));
         }
 
         public Student FindStudent(string name)
         {
-            return _listOfStudents.First(student => student.Name.Equals(name));
+            return _listOfStudents.FirstOrDefault(student => student.Name.Equals(name));
         }
 
-        public List<Student> FindStudents(string groupName)
+        public IReadOnlyList<Student> FindStudents(string groupName)
         {
-            return FindGroup(groupName).Students;
+            return FindGroup(groupName).StudentsOfGroup.ToList();
         }
 
         public List<Student> FindStudents(CourseNumber courseNumber)
         {
-            return _listOfStudents.Where(student => student.Group.CourseNumber.Equals(courseNumber.Number)).ToList();
+            return _listOfStudents.Where(student => student.Group.CourseNumber.Number.Equals(courseNumber.Number))
+                .ToList();
         }
 
         public Group FindGroup(string groupName)
         {
-            return _listOfGroups.First(@group => @group.Name.Equals(groupName));
+            return _listOfGroups.First(group => group.Name.Equals(groupName));
         }
 
         public List<Group> FindGroups(CourseNumber courseNumber)
         {
-            return _listOfGroups.Where(@group => group.CourseNumber.Equals(courseNumber.Number)).ToList();
+            return _listOfGroups.Where(group => group.CourseNumber.Number.Equals(courseNumber.Number)).ToList();
         }
 
-        public void ChangeStudentGroup(Student student, Group newGroup)
-        {
-            Group previousGroup = student.Group;
-            if (previousGroup == null) return;
-            student.ChangeGroup(newGroup);
-            previousGroup.Students.Remove(student);
-            newGroup.Students.Add(student);
-        }
+        public void ChangeStudentGroup(Student student, Group newGroup) => Group.MovePerson(student, newGroup);
     }
 }
