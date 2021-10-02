@@ -26,12 +26,13 @@ namespace Isu
 
         public Student GetStudent(int id)
         {
-            if (_listOfStudents.FirstOrDefault(student => student.Id.Equals(id)) == null)
+            Student student = _listOfStudents.FirstOrDefault(student => student.Id.Equals(id));
+            if (student == null)
             {
                 throw new StudentDoesNotExistException();
             }
 
-            return _listOfStudents.First(student => student.Id.Equals(id));
+            return student;
         }
 
         public Student FindStudent(string name)

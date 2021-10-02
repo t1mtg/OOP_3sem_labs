@@ -15,17 +15,10 @@
     <projectFile>Banks.Tests/Banks.Tests.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f29c5c5e-610f-487d-a8fc-5247522c3c78" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Isu/Tools/InvalidCourseNumberException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Isu/Tools/InvalidGroupNameException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Isu/Tools/StudentDoesNotExistException.cs" afterDir="false" />
+    <list default="true" id="f29c5c5e-610f-487d-a8fc-5247522c3c78" name="Changes" comment="fix">
       <change afterPath="$PROJECT_DIR$/Shops/IShopService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Isu.Tests/IsuServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Isu.Tests/IsuServiceTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Isu/CourseNumber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Isu/CourseNumber.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Isu/Group.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Isu/Group.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Isu/IsuService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Isu/IsuService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Isu/Services/IIsuService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Isu/Services/IIsuService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +307,7 @@
       <workItem from="1631728310678" duration="3205000" />
       <workItem from="1631971411692" duration="15313000" />
       <workItem from="1632749640691" duration="1614000" />
-      <workItem from="1632845582172" duration="8886000" />
+      <workItem from="1632845582172" duration="11550000" />
     </task>
     <task id="LOCAL-00001" summary="init_commit">
       <created>1631462902281</created>
@@ -372,7 +365,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632749754954</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix">
+      <created>1633103244098</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1633103244098</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -414,6 +414,7 @@
     <MESSAGE value="fix: change dotnet version in project files" />
     <MESSAGE value="fix: Exception class and private setter in Student group" />
     <MESSAGE value="fix: ReachMaxAmountException" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: ReachMaxAmountException" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
 </project>
