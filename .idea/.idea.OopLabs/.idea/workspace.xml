@@ -15,10 +15,24 @@
     <projectFile>Banks.Tests/Banks.Tests.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f29c5c5e-610f-487d-a8fc-5247522c3c78" name="Changes" comment="fix">
+    <list default="true" id="f29c5c5e-610f-487d-a8fc-5247522c3c78" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Shops.Tests/ShopServiceTest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops.rar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/Customer.cs" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Shops/IShopService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/Product.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/ProductRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/Shop.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/ShopProduct.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/ShopRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/ShopService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/Tools/NotEnoughMoneyException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/Tools/NotEnoughProductsInShopException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/Tools/ProductNotFoundException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/Tools/ShopException.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Shops/Tools/ShopNotFoundException.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Isu/IsuService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Isu/IsuService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shops.Tests/Shops.Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Shops.Tests/Shops.Tests.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,16 +62,22 @@
     <setting file="file://$PROJECT_DIR$/Isu/IsuService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/CourseNumber.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Tools/IsuException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d392db2fb3d64f4fa564a7b744fc78015f800/ec/6efe67ae/Assert.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Services/IIsuService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Tools/ReachMaxAmountException.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b997ce4b621741e6875cc78c527be20d66578/46/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1xlLr5S8kysifs8t0gImuHoXbxx" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
@@ -307,7 +327,8 @@
       <workItem from="1631728310678" duration="3205000" />
       <workItem from="1631971411692" duration="15313000" />
       <workItem from="1632749640691" duration="1614000" />
-      <workItem from="1632845582172" duration="11550000" />
+      <workItem from="1632845582172" duration="29684000" />
+      <workItem from="1633373859134" duration="3955000" />
     </task>
     <task id="LOCAL-00001" summary="init_commit">
       <created>1631462902281</created>
@@ -372,7 +393,21 @@
       <option name="project" value="LOCAL" />
       <updated>1633103244098</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix">
+      <created>1633192857516</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1633192857516</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix: GetStudent">
+      <created>1633192966148</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1633192966148</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -406,6 +441,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="init_commit" />
     <MESSAGE value="fix1" />
@@ -415,6 +451,7 @@
     <MESSAGE value="fix: Exception class and private setter in Student group" />
     <MESSAGE value="fix: ReachMaxAmountException" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
+    <MESSAGE value="fix: GetStudent" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: GetStudent" />
   </component>
 </project>
