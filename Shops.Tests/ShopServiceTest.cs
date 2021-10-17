@@ -33,11 +33,12 @@ namespace Shops.Tests
             _shopService.SupplyShopWithProducts(shop1, storeProducts);
             Assert.AreEqual(3, shop1.ShopProducts.Count);
             Assert.AreEqual("Coca-Cola", shop1.ShopProducts
-                .First(product => product1.Id.Equals(product.Id)).Name);
+                .First(product => product1.Id.Equals(product.ProductId)).Name);
+
             Assert.AreEqual(120, shop1.ShopProducts
-                .First(product => product2.Id.Equals(product.Id)).Price);
+                .First(product => product2.Id.Equals(product.ProductId)).Price);
             Assert.AreEqual(100, shop1.ShopProducts
-                .First(product => product3.Id.Equals(product.Id)).Count);
+                .First(product => product3.Id.Equals(product.ProductId)).Count);
         }
 
         [Test]
@@ -54,20 +55,22 @@ namespace Shops.Tests
             };
             _shopService.SupplyShopWithProducts(shop1, shopProducts);
             var customer1 = new Customer(1000);
-            var cart1 = new Dictionary<Product, int>()
+
+            var cart1 = new List<Order>()
             {
-                {product3, 2}
+                new Order(product3, 2)
             };
+
             Assert.Catch<ProductNotFoundException>(() =>
             {
                 _shopService.Buy(customer1, shop1, cart1);
             });
 
             var customer2 = new Customer(100);
-            var cart2 = new Dictionary<Product, int>()
+            var cart2 = new List<Order>()
             {
-                {product1, 5},
-                {product2, 4}
+                new Order(product1, 5),
+                new Order(product2, 4),
             };
             Assert.Catch<NotEnoughMoneyException>(() =>
             {
@@ -75,10 +78,10 @@ namespace Shops.Tests
             });
 
             var customer3 = new Customer(5000);
-            var cart3 = new Dictionary<Product, int>()
+            var cart3 = new List<Order>()
             {
-                {product1, 9},
-                {product2, 21}
+                new Order(product1, 9),
+                new Order(product2, 21),
             };
             Assert.Catch<NotEnoughProductsInShopException>(() =>
             {
@@ -100,7 +103,7 @@ namespace Shops.Tests
 
             Assert.AreEqual(60,
                 shop.ShopProducts
-                    .First(shopProduct => product.Id.Equals(shopProduct.Id)).Price);
+                    .First(shopProduct => product.Id.Equals(shopProduct.ProductId)).Price);
         }
 
         [Test]
@@ -125,9 +128,9 @@ namespace Shops.Tests
             _shopService.SupplyShopWithProducts(shop1, shopProducts1);
             _shopService.SupplyShopWithProducts(shop2, shopProducts2);
             _shopService.SupplyShopWithProducts(shop3, shopProducts3);
-            var cart = new Dictionary<Product, int>()
+            var cart = new List<Order>()
             {
-                {product, 40}
+                new Order(product, 40)
             };
             Assert.AreEqual(shop1.Id, _shopService.FindShopWithLowestProductPrice(cart).Id);
         }
@@ -148,9 +151,9 @@ namespace Shops.Tests
             };
             _shopService.SupplyShopWithProducts(shop1, shopProducts1);
             _shopService.SupplyShopWithProducts(shop2, shopProducts2);
-            var cart = new Dictionary<Product, int>()
+            var cart = new List<Order>()
             {
-                {product, 60}
+                new Order(product, 60)
             };
             Assert.Catch<ShopNotFoundException>(() =>
             {
@@ -169,15 +172,14 @@ namespace Shops.Tests
             };
             _shopService.SupplyShopWithProducts(shop1, shopProducts1);
             var customer = new Customer(1000);
-            var cart = new Dictionary<Product, int>()
+            var cart = new List<Order>()
             {
-                {product, 5}
+                new Order(product, 5)
             };
             _shopService.Buy(customer, shop1, cart);
             Assert.AreEqual(450, customer.Balance);
             Assert.AreEqual(45, shop1.ShopProducts
-                .First(shopProduct => shopProduct.Id.Equals(product.Id)).Count);
+                .First(shopProduct => shopProduct.ProductId.Equals(product.Id)).Count);
         }
-        
     }
 }

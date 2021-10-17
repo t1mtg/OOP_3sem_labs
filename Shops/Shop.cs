@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Shops.Tools;
 
 namespace Shops
 {
     public class Shop
     {
+        private readonly List<ShopProduct> _products;
+
         public Shop(string name, string address)
         {
             Name = name;
             Address = address;
-            Products = new List<ShopProduct>();
-            ShopProducts = Products.AsReadOnly();
+            _products = new List<ShopProduct>();
+            ShopProducts = _products.AsReadOnly();
             Id = Guid.NewGuid();
         }
 
@@ -18,11 +22,20 @@ namespace Shops
         public Guid Id { get; }
         public string Address { get; }
         public string Name { get; }
-        private List<ShopProduct> Products { get; }
 
         public void AddProduct(ShopProduct product)
         {
-            Products.Add(product);
+            if (GetShopProduct(product.ProductId) != null)
+            {
+                throw new ProductIsAlreadyInTheListException();
+            }
+
+            _products.Add(product);
+        }
+
+        public ShopProduct GetShopProduct(Guid id)
+        {
+            return ShopProducts.FirstOrDefault(shopProduct => shopProduct.ProductId.Equals(id));
         }
     }
 }

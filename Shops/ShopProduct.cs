@@ -4,14 +4,16 @@ namespace Shops
 {
     public class ShopProduct
     {
-        public ShopProduct(Guid id, int price, string name, int count)
+        public ShopProduct(Guid productId, int price, string name, int count)
         {
-            Id = id;
+            ProductId = productId;
+            Id = Guid.NewGuid();
             Price = price;
             Name = name;
             Count = count;
         }
 
+        public Guid ProductId { get; }
         public Guid Id { get; }
         public int Price { get; set; }
         public string Name { get; }

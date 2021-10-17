@@ -8,7 +8,7 @@ namespace Shops
     {
         private readonly List<Shop> _shops = new List<Shop>();
 
-        public List<Shop> AllShops()
+        public IReadOnlyList<Shop> AllShops()
         {
             return _shops;
         }

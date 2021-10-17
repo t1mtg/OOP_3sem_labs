@@ -5,7 +5,7 @@ using Shops.Tools;
 
 namespace Shops
 {
-    public class ShopService : IShopService
+    public class ShopService
     {
         private readonly ProductRepository _productRepository;
         private readonly ShopRepository _shopRepository;
@@ -48,49 +48,56 @@ namespace Shops
             }
         }
 
-        public void Buy(Customer customer, Shop shop, Dictionary<Product, int> products)
+        public void Buy(Customer customer, Shop shop, List<Order> cart)
         {
             int sum = 0;
-            foreach ((Product key, int value) in products)
+            var productsToDelete = new List<Order>();
+            foreach (Order product in cart)
             {
-                ShopProduct shopProduct = _shopRepository.FindShopProductById(key.Id);
+                ShopProduct shopProduct = shop.GetShopProduct(product.Product.Id);
                 if (shopProduct == null)
                 {
                     throw new ProductNotFoundException();
                 }
 
-                if (value > shopProduct.Count)
+                if (product.Count > shopProduct.Count)
                 {
                     throw new NotEnoughProductsInShopException();
                 }
 
-                sum += shopProduct.Price * value;
+                sum += shopProduct.Price * product.Count;
                 if (sum > customer.Balance)
                 {
                     throw new NotEnoughMoneyException();
                 }
 
-                shopProduct.Count -= value;
+                productsToDelete.Add(product);
+            }
+
+            foreach (Order product in productsToDelete)
+            {
+                ShopProduct shopProduct = shop.GetShopProduct(product.Product.Id);
+                shopProduct.Count -= product.Count;
             }
 
             customer.Balance -= sum;
         }
 
-        public Shop FindShopWithLowestProductPrice(Dictionary<Product, int> products)
+        public Shop FindShopWithLowestProductPrice(List<Order> cart)
         {
             var shopWithLowestPrice = new KeyValuePair<Shop, int>(null, int.MaxValue);
             int sum = 0;
             foreach (Shop shop in _shopRepository.AllShops())
             {
-                foreach ((Product key, int value) in products)
+                foreach (Order product in cart)
                 {
-                    ShopProduct shopProduct = _shopRepository.FindShopProductById(key.Id);
-                    if (shopProduct == null || shopProduct.Count < value)
+                    ShopProduct shopProduct = shop.GetShopProduct(product.Product.Id);
+                    if (shopProduct == null || shopProduct.Count < product.Count)
                     {
                         break;
                     }
 
-                    sum += shopProduct.Price * value;
+                    sum += shopProduct.Price * product.Count;
                     if (sum < shopWithLowestPrice.Value)
                     {
                         shopWithLowestPrice = new KeyValuePair<Shop, int>(shop, sum);
@@ -108,7 +115,7 @@ namespace Shops
 
         public void ChangePrice(Shop shop, Product product, int newPrice)
         {
-            ShopProduct shopProduct = _shopRepository.FindShopProductById(product.Id);
+            ShopProduct shopProduct = shop.GetShopProduct(product.Id);
             if (shopProduct == null)
             {
                 throw new ProductNotFoundException();
