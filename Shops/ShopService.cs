@@ -35,7 +35,7 @@ namespace Shops
             foreach (ShopProduct product in products)
             {
                 ShopProduct productFromShop =
-                    shop.ShopProducts.FirstOrDefault(storeProduct => storeProduct.Id.Equals(product.Id));
+                    shop.ShopProducts.FirstOrDefault(storeProduct => storeProduct.Equals(product));
                 if (productFromShop == null)
                 {
                     shop.AddProduct(product);
@@ -54,7 +54,7 @@ namespace Shops
             var productsToDelete = new List<Order>();
             foreach (Order product in cart)
             {
-                ShopProduct shopProduct = shop.GetShopProduct(product.Product.Id);
+                ShopProduct shopProduct = shop.GetShopProduct(product.Product);
                 if (shopProduct == null)
                 {
                     throw new ProductNotFoundException();
@@ -76,7 +76,7 @@ namespace Shops
 
             foreach (Order product in productsToDelete)
             {
-                ShopProduct shopProduct = shop.GetShopProduct(product.Product.Id);
+                ShopProduct shopProduct = shop.GetShopProduct(product.Product);
                 shopProduct.Count -= product.Count;
             }
 
@@ -91,7 +91,7 @@ namespace Shops
             {
                 foreach (Order product in cart)
                 {
-                    ShopProduct shopProduct = shop.GetShopProduct(product.Product.Id);
+                    ShopProduct shopProduct = shop.GetShopProduct(product.Product);
                     if (shopProduct == null || shopProduct.Count < product.Count)
                     {
                         break;
@@ -115,7 +115,7 @@ namespace Shops
 
         public void ChangePrice(Shop shop, Product product, int newPrice)
         {
-            ShopProduct shopProduct = shop.GetShopProduct(product.Id);
+            ShopProduct shopProduct = shop.GetShopProduct(product);
             if (shopProduct == null)
             {
                 throw new ProductNotFoundException();

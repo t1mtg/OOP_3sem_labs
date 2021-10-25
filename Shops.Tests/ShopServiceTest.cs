@@ -36,9 +36,9 @@ namespace Shops.Tests
                 .First(product => product1.Id.Equals(product.ProductId)).Name);
 
             Assert.AreEqual(120, shop1.ShopProducts
-                .First(product => product2.Id.Equals(product.ProductId)).Price);
+                .First(product => product2 == product).Price);
             Assert.AreEqual(100, shop1.ShopProducts
-                .First(product => product3.Id.Equals(product.ProductId)).Count);
+                .First(product => product3 == product).Count);
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace Shops.Tests
 
             Assert.AreEqual(60,
                 shop.ShopProducts
-                    .First(shopProduct => product.Id.Equals(shopProduct.ProductId)).Price);
+                    .First(shopProduct => product == shopProduct).Price);
         }
 
         [Test]
@@ -176,10 +176,11 @@ namespace Shops.Tests
             {
                 new Order(product, 5)
             };
+            
             _shopService.Buy(customer, shop1, cart);
             Assert.AreEqual(450, customer.Balance);
             Assert.AreEqual(45, shop1.ShopProducts
-                .First(shopProduct => shopProduct.ProductId.Equals(product.Id)).Count);
+                .First(shopProduct => product == shopProduct).Count);
         }
     }
 }

@@ -18,14 +18,9 @@ namespace Shops
             _shops.Add(shop);
         }
 
-        public bool ExistsByName(string name)
+        public ShopProduct FindShopProduct(ShopProduct shopProduct)
         {
-            return _shops.Any(shop => name.ToLower().Equals(shop.Name.ToLower()));
-        }
-
-        public ShopProduct FindShopProductById(Guid id)
-        {
-            return _shops.SelectMany(shop => shop.ShopProducts).FirstOrDefault(product => id.Equals(product.Id));
+            return _shops.SelectMany(shop => shop.ShopProducts).FirstOrDefault(product => product.Equals(shopProduct));
         }
     }
 }

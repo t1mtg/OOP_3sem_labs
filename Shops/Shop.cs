@@ -23,9 +23,27 @@ namespace Shops
         public string Address { get; }
         public string Name { get; }
 
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Shop)obj);
+        }
+
+        public bool Equals(Shop other)
+        {
+            return Id.Equals(other.Id);
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
         public void AddProduct(ShopProduct product)
         {
-            if (GetShopProduct(product.ProductId) != null)
+            if (GetShopProduct(product) != null)
             {
                 throw new ProductIsAlreadyInTheListException();
             }
@@ -33,9 +51,14 @@ namespace Shops
             _products.Add(product);
         }
 
-        public ShopProduct GetShopProduct(Guid id)
+        public ShopProduct GetShopProduct(ShopProduct product)
         {
-            return ShopProducts.FirstOrDefault(shopProduct => shopProduct.ProductId.Equals(id));
+            return ShopProducts.FirstOrDefault(product.Equals);
+        }
+
+        public ShopProduct GetShopProduct(Product product)
+        {
+            return ShopProducts.FirstOrDefault(shopProduct => product == shopProduct);
         }
     }
 }

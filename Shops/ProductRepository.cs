@@ -14,14 +14,9 @@ namespace Shops
             return _products;
         }
 
-        public bool ExistsByName(string name)
-        {
-            return _products.Any(product => name.ToLower().Equals(product.Name.ToLower()));
-        }
-
         public void AddProduct(Product product)
         {
-            if (GetProductById(product.Id) != null)
+            if (GetProduct(product) != null)
             {
                 throw new ProductIsAlreadyInTheListException();
             }
@@ -29,9 +24,9 @@ namespace Shops
             _products.Add(product);
         }
 
-        private Product GetProductById(Guid id)
+        private Product GetProduct(Product product)
         {
-            return _products.FirstOrDefault(product => product.Id.Equals(id));
+            return _products.FirstOrDefault(product1 => product1.Equals(product));
         }
     }
 }
