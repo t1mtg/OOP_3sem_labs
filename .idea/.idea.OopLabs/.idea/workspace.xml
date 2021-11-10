@@ -16,17 +16,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f29c5c5e-610f-487d-a8fc-5247522c3c78" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Shops/Order.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shops/Tools/NegativeBalanceException.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Shops/Tools/ProductIsAlreadyInTheListException.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shops.Tests/ShopServiceTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shops.Tests/ShopServiceTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shops/Customer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shops/Customer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shops/ProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shops/ProductRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shops/Shop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shops/Shop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shops/ShopProduct.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shops/ShopProduct.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shops/ShopRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shops/ShopRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shops/ShopService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Shops/ShopService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,29 +41,34 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Isu.Tests/IsuServiceTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Downloads/Telegram Desktop/OgnpServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Tools/ReachMaxAmountException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Shops/Product.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Tools/IsuException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d392db2fb3d64f4fa564a7b744fc78015f800/ec/6efe67ae/Assert.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Shops/Customer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Services/IIsuService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/CourseNumber.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/IsuService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/IShopService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Group.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/ShopRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/BaHo/Documents/GitHub/t1mtg/Shops/Product.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Student.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/ProductRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/ShopService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b997ce4b621741e6875cc78c527be20d66578/46/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Shop.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/ShopProduct.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/29a328843bdc4762af89c8fdc084c4d68f5778/eb/389ea4fd/Guid.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/NotEnoughProductsInShopException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/8B/Guid.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/ShopException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/ShopNotFoundException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/ProductNotFoundException.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/NotEnoughMoneyException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/nunit/nunit/c933a883ea25263ec575a654dae69fa38000edd9/src/NUnitFramework/framework/Assert.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Shops/Product.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d392db2fb3d64f4fa564a7b744fc78015f800/ec/6efe67ae/Assert.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Shops/Customer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b997ce4b621741e6875cc78c527be20d66578/46/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Isu/Program.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1xlLr5S8kysifs8t0gImuHoXbxx" />
   <component name="ProjectLevelVcsManager">
@@ -452,5 +447,12 @@
     <MESSAGE value="fix" />
     <MESSAGE value="initial commit" />
     <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="Frame#IsuExtra.Tests.OgnpServiceTest.DeleteStudentsFromOgnp_StudentDeleted" memberName="student" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
