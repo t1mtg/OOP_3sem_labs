@@ -13,8 +13,8 @@ namespace Backups
             var backup = new Backup();
             BackupJob backupJob = backup.CreateBackupJob(new JobObject(list));
             var fileSystemRepository = new FileSystemRepository(list);
-            backupJob.AddNewRestorePoint(Algorithm.Single, FileSystemConfig.Folder, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\res", fileSystemRepository);
-            backupJob.AddNewRestorePoint(Algorithm.Single, FileSystemConfig.Folder, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\res", fileSystemRepository);
+            backupJob.AddNewRestorePoint(Algorithm.SingleArchive, FileSystemConfig.Folder, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\res", fileSystemRepository);
+            backupJob.AddNewRestorePoint(Algorithm.SingleArchive, FileSystemConfig.Folder, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\res", fileSystemRepository);
         }
     }
 }

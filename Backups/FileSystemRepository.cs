@@ -27,12 +27,12 @@ namespace Backups
         {
             switch (algorithm)
             {
-                case Algorithm.Single:
+                case Algorithm.SingleArchive:
                     var singleStorage = new SingleStorage(_objects);
                     singleStorage.Archive(config, numberOfRestorePoints, path);
                     _storages.AddRange(singleStorage.GetArchivedFiles());
                     return singleStorage.GetArchivedFiles();
-                case Algorithm.Split:
+                case Algorithm.SplitArchives:
                     var splitStorages = new SplitStorage(_objects);
                     splitStorages.Archive(config, numberOfRestorePoints, path);
                     _storages.AddRange(splitStorages.GetArchivedFiles());

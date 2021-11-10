@@ -2,7 +2,7 @@
 {
     public enum Algorithm
     {
-        Split,
-        Single,
+        SplitArchives,
+        SingleArchive,
     }
 }

@@ -17,9 +17,9 @@ namespace Backups.Tests
 
             var repository = new FileSystemRepository(objects);
             BackupJob backupJob = backup.CreateBackupJob(new JobObject(objects));
-            backupJob.AddNewRestorePoint(Algorithm.Split, FileSystemConfig.Tests, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups", repository);
+            backupJob.AddNewRestorePoint(Algorithm.SplitArchives, FileSystemConfig.Tests, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups", repository);
             backupJob.RemoveObject(@"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\pic1.png");
-            backupJob.AddNewRestorePoint(Algorithm.Split, FileSystemConfig.Tests, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups", repository);
+            backupJob.AddNewRestorePoint(Algorithm.SplitArchives, FileSystemConfig.Tests, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups", repository);
             Assert.AreEqual(backupJob.GetListOfStorages().Count , 3);
             Assert.AreEqual(backupJob.GetListOfRestorePoints().Count , 2);
         }
