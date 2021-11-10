@@ -13,8 +13,8 @@ namespace Shops
         public Guid Id { get; }
         public string Name { get; }
 
-public override bool Equals(object obj)
-        => obj is Product product && (Id == product.Id);
+        public override bool Equals(object obj)
+            => obj is Product product && (Id == product.Id);
 
         public override int GetHashCode()
         {
