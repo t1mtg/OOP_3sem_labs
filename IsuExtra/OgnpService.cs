@@ -36,30 +36,19 @@ namespace IsuExtra
             }
 
             List<FacultyLesson> studentFacultyLessons = GetStudentFacultyLessons(student);
-            foreach (Stream ognpStream in ognp.Streams)
+            foreach (Stream ognpStream in ognp.Streams.Where(ognpStream => ognpStream.StudentsOfStream.Count < ognpStream.MaxAmountOfStudents).Where(ognpStream => !IsOgnpStreamLessonsOverlapFacultyLessons(ognpStream.OgnpLessons, studentFacultyLessons)))
             {
-                if (ognpStream.StudentsOfStream.Count >= ognpStream.MaxAmountOfStudents)
-                {
-                    continue;
-                }
-
-                if (!IsOgnpStreamLessonsOverlapFacultyLessons(ognpStream.OgnpLessons, studentFacultyLessons))
-                {
-                    ognpStream.AddPerson(student);
-                    return;
-                }
+                ognpStream.AddPerson(student);
+                return;
             }
         }
 
         public void DeleteStudentFromOgnp(Student student, Ognp ognp)
         {
-            foreach (Stream stream in ognp.Streams)
+            foreach (Stream stream in ognp.Streams.Where(stream => stream.StudentsOfStream.Any(streamStudent => streamStudent.Id.Equals(student.Id))))
             {
-                if (stream.StudentsOfStream.Any(streamStudent => streamStudent.Id.Equals(student.Id)))
-                {
-                    stream.RemovePerson(student);
-                    return;
-                }
+                stream.RemovePerson(student);
+                return;
             }
         }
 
@@ -87,14 +76,11 @@ namespace IsuExtra
 
         private int CountStudentOgnps(Student student)
         {
-            var studentsThatHaveOgnp = _megaFaculties
+            return _megaFaculties
                 .Select(faculty => faculty.Ognp)
                 .SelectMany(ognp => ognp.Streams)
                 .SelectMany(stream => stream.StudentsOfStream)
-                .ToList();
-            return studentsThatHaveOgnp
-                .FindAll(student1 => student.Id.Equals(student1.Id))
-                .Count;
+                .Count(currentStudent => currentStudent.Id.Equals(student.Id));
         }
 
         private List<FacultyLesson> GetStudentFacultyLessons(Student student)
@@ -113,27 +99,13 @@ namespace IsuExtra
                 return false;
             }
 
-            foreach (OgnpLesson ognpStreamLesson in ognpStreamLessons)
-            {
-                foreach (FacultyLesson facultyLesson in facultyLessons)
-                {
-                    if (facultyLesson.Day.Equals(ognpStreamLesson.Day)
-                        && IsTwoLessonsOverlap(facultyLesson, ognpStreamLesson))
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
+            return (from ognpStreamLesson in ognpStreamLessons from facultyLesson in facultyLessons where facultyLesson.Day.Equals(ognpStreamLesson.Day) && IsTwoLessonsOverlap(facultyLesson, ognpStreamLesson) select ognpStreamLesson).Any();
         }
 
         private bool IsTwoLessonsOverlap(Lesson lesson1, Lesson lesson2)
         {
             const int lessonDurationInMinutes = 90;
-            return Math.Abs(lesson1.StartTime.Minutes - lesson2.StartTime.Minutes) < lessonDurationInMinutes
-                ? true
-                : false;
+            return Math.Abs(lesson1.StartTime.Minutes - lesson2.StartTime.Minutes) < lessonDurationInMinutes;
         }
     }
 }
