@@ -29,8 +29,8 @@ namespace Banks.Transactions
                 throw new CreditLimitExceededException();
             }
 
-            SourceAccount.Balance -= TransactionSum;
-            DestinationAccount.Balance += TransactionSum;
+            SourceAccount.UpdateBalance(-TransactionSum);
+            DestinationAccount.UpdateBalance(TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
             SourceAccount.Transactions.Add(this);
         }
@@ -42,8 +42,8 @@ namespace Banks.Transactions
                 throw new OperationIsAlreadyCancelledException();
             }
 
-            SourceAccount.Balance += TransactionSum;
-            DestinationAccount.Balance -= TransactionSum;
+            SourceAccount.UpdateBalance(TransactionSum);
+            DestinationAccount.UpdateBalance(-TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
             SourceAccount.Transactions.Add(this);
         }

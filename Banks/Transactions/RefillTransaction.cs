@@ -23,7 +23,7 @@ namespace Banks.Transactions
                 throw new TransactionSumLessThanZeroException();
             }
 
-            SourceAccount.Balance += TransactionSum;
+            SourceAccount.UpdateBalance(TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
             SourceAccount.Transactions.Add(this);
         }
@@ -35,7 +35,7 @@ namespace Banks.Transactions
                 throw new OperationIsAlreadyCancelledException();
             }
 
-            SourceAccount.Balance -= TransactionSum;
+            SourceAccount.UpdateBalance(-TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
             SourceAccount.Transactions.Add(this);
         }

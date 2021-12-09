@@ -6,18 +6,27 @@ namespace Banks.Accounts
 {
     public class DepositAccount : Account
     {
-        public DepositAccount(Client client, int unverifiedLimit, DateTime depositExpirationDate, int depositSum)
+        public DepositAccount(Client client, int unverifiedLimit, DateTime depositExpirationDate, int depositSum, InterestRates interestRates)
             : base(client, unverifiedLimit)
         {
             DepositExpirationDate = depositExpirationDate;
             DepositSum = depositSum;
+            InterestRates = interestRates;
         }
 
-        public decimal DepositSum { get; set; }
+        public decimal DepositSum { get; }
+        public InterestRates InterestRates { get; }
         public DateTime LastDateTimeInterestAdded { get; set; } = default;
         public DateTime DepositExpirationDate { get; }
 
-        public void CalculatePercents(DateTime dateTime, decimal percents)
+        public override void PayPercents(DateTime dateTime)
+        {
+            CalculatePercents(dateTime, CalculateDepositPercent(DepositSum));
+            AddInterest(TempInterestSum, dateTime);
+            TempInterestSum = decimal.Zero;
+        }
+
+        private void CalculatePercents(DateTime dateTime, decimal percents)
         {
             if (LastDateTimeInterestAdded == default)
             {
@@ -37,11 +46,21 @@ namespace Banks.Accounts
             LastDateTimeInterestAdded = dateTime;
         }
 
-        public void AddInterest(decimal interestSum, DateTime dateTime)
+        private void AddInterest(decimal interestSum, DateTime dateTime)
         {
             var transaction = new RefillTransaction(dateTime, interestSum, this);
             transaction.Commit();
             Transactions.Add(transaction);
+        }
+
+        private decimal CalculateDepositPercent(decimal depositSum)
+        {
+            foreach ((int limit, decimal interestRateValue) in InterestRates.InterestRate.Where(tuple => depositSum < tuple.Limit))
+            {
+                return interestRateValue;
+            }
+
+            return InterestRates.InterestRate.Last().InterestRateValue;
         }
 
         private int AmountOfDays(DateTime dateTime)

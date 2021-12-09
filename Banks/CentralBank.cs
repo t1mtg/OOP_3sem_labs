@@ -20,7 +20,7 @@ namespace Banks
             }
         }
 
-        public Bank RegisterBank(string name, decimal debitPercent, int unverifiedLimit, int creditBelowZeroLimit, decimal creditCommission, List<InterestRate> interestRates)
+        public Bank RegisterBank(string name, decimal debitPercent, int unverifiedLimit, int creditBelowZeroLimit, decimal creditCommission, InterestRates interestRates)
         {
             var bank = new Bank(name, debitPercent, unverifiedLimit, creditBelowZeroLimit, creditCommission, interestRates);
             _banks.Add(bank);

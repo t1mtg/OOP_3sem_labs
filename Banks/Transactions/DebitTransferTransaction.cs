@@ -23,8 +23,8 @@ namespace Banks.Transactions
                 throw new AccountUnverifiedException();
             }
 
-            SourceAccount.Balance -= TransactionSum;
-            DestinationAccount.Balance += TransactionSum;
+            SourceAccount.UpdateBalance(-TransactionSum);
+            DestinationAccount.UpdateBalance(TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
             SourceAccount.Transactions.Add(this);
         }
@@ -36,9 +36,9 @@ namespace Banks.Transactions
                 throw new OperationIsAlreadyCancelledException();
             }
 
-            SourceAccount.Balance -= TransactionSum;
+            SourceAccount.UpdateBalance(-TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
-            DestinationAccount.Balance += TransactionSum;
+            DestinationAccount.UpdateBalance(TransactionSum);
             SourceAccount.Transactions.Add(this);
         }
     }

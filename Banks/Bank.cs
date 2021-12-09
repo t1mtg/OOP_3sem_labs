@@ -7,7 +7,7 @@ namespace Banks
 {
     public class Bank
     {
-        public Bank(string name, decimal debitPercent, int unverifiedLimit, int creditBelowZeroLimit, decimal creditCommission, List<InterestRate> interestRates)
+        public Bank(string name, decimal debitPercent, int unverifiedLimit, int creditBelowZeroLimit, decimal creditCommission, InterestRates interestRates)
         {
             Accounts = new List<Account>();
             Id = Guid.NewGuid();
@@ -27,19 +27,20 @@ namespace Banks
         public int UnverifiedLimit { get; set; }
         public decimal DebitPercent { get; set; }
 
-        private List<InterestRate> InterestRates { get; set; }
+        private InterestRates InterestRates { get; set; }
 
         public DebitAccount AddNewDebitAccount(Client client)
         {
             var debitAccount = new DebitAccount(client, UnverifiedLimit);
+            debitAccount.DebitPercent = DebitPercent;
             Accounts.Add(debitAccount);
             client.Accounts.Add(debitAccount);
             return debitAccount;
         }
 
-        public DepositAccount AddNewDepositAccount(Client client, DateTime depositExpirationDate, int depositSum)
+        public DepositAccount AddNewDepositAccount(Client client, DateTime depositExpirationDate, int depositSum, InterestRates interestRates)
         {
-            var depositAccount = new DepositAccount(client, UnverifiedLimit, depositExpirationDate, depositSum);
+            var depositAccount = new DepositAccount(client, UnverifiedLimit, depositExpirationDate, depositSum, interestRates);
             depositAccount.UpdateBalance(depositSum);
             Accounts.Add(depositAccount);
             client.Accounts.Add(depositAccount);
@@ -89,7 +90,7 @@ namespace Banks
                 .ForEach(_ => Client.GetUpdate($"Credit below zero changed. New value: {newLimit}"));
         }
 
-        public void ChangeInterestRates(List<InterestRate> newInterestRates)
+        public void ChangeInterestRates(InterestRates newInterestRates)
         {
             InterestRates = newInterestRates;
             Accounts.Where(account => account.ClientSubscribed && account is CreditAccount)
@@ -102,50 +103,8 @@ namespace Banks
         {
             foreach (Account account in Accounts)
             {
-                switch (account)
-                {
-                    case DebitAccount debitAccount:
-                        PayDebitPercents(debitAccount, dateTime);
-                        break;
-                    case DepositAccount depositAccount:
-                        PayDepositPercents(dateTime, depositAccount);
-                        break;
-                    case CreditAccount creditAccount:
-                        PayCreditPercents(creditAccount, dateTime);
-                        break;
-                }
+                account.PayPercents(dateTime);
             }
-        }
-
-        private void PayDepositPercents(DateTime dateTime, DepositAccount depositAccount)
-        {
-            depositAccount.CalculatePercents(dateTime, CalculateDepositPercent(depositAccount.DepositSum));
-            depositAccount.AddInterest(depositAccount.TempInterestSum, dateTime);
-            depositAccount.TempInterestSum = decimal.Zero;
-        }
-
-        private void PayDebitPercents(DebitAccount debitAccount, DateTime dateTime)
-        {
-            debitAccount.CalculatePercents(dateTime, DebitPercent);
-            debitAccount.AddInterest(debitAccount.TempInterestSum, dateTime);
-            debitAccount.TempInterestSum = decimal.Zero;
-        }
-
-        private void PayCreditPercents(CreditAccount creditAccount, DateTime dateTime)
-        {
-            creditAccount.CalculateCommissions(creditAccount, dateTime);
-            creditAccount.SubtractCommission(creditAccount.TempCommissionSum, dateTime);
-            creditAccount.TempCommissionSum = decimal.Zero;
-        }
-
-        private decimal CalculateDepositPercent(decimal depositSum)
-        {
-            foreach (InterestRate interestRate in InterestRates.Where(interestRate => depositSum < interestRate.Limit))
-            {
-                return interestRate.InterestRateValue;
-            }
-
-            return InterestRates.Last().InterestRateValue;
         }
     }
 }

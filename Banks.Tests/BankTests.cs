@@ -21,12 +21,10 @@ namespace Banks.Tests
         [SetUp]
         public void Setup()
         {
-            var interestRates = new List<InterestRate>()
-            {
-                new InterestRate(10000, 4),
-                new InterestRate(20000, 5),
-                new InterestRate(30000, 6)
-            };
+            var interestRates = new InterestRates();
+            interestRates.AddNewInterestRate(10000, 4);
+            interestRates.AddNewInterestRate(20000, 5);
+            interestRates.AddNewInterestRate(30000, 6);
             _centralBank = new CentralBank();
             _bank = _centralBank.RegisterBank("Gurman Bank", 1, 10000, 1488, 22, interestRates);
             _client1 = Client.Builder("Timofey Gurman").SetAddress("Vyazemskiy 5/7").GetClient();
@@ -94,7 +92,7 @@ namespace Banks.Tests
         {
             DateTime fourMonthsPassed = DateTime.Now.AddMonths(4);
             _centralBank.Notify(fourMonthsPassed);
-            Assert.AreEqual(5016, Math.Round(_debitAccount1.Balance));
+            Assert.AreEqual(5017, Math.Round(_debitAccount1.Balance));
         }
         
     }

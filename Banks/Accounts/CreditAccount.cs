@@ -18,29 +18,36 @@ namespace Banks.Accounts
         public decimal TempCommissionSum { get; set; }
         public decimal CreditCommission { get; set; }
 
-        public void CalculateCommissions(CreditAccount creditAccount, DateTime dateTime)
+        public override void PayPercents(DateTime dateTime)
         {
-            if (creditAccount.LastDateTimeCommissionSubtracted == default)
+            CalculateCommissions(dateTime);
+            SubtractCommission(TempCommissionSum, dateTime);
+            TempCommissionSum = decimal.Zero;
+        }
+
+        private void CalculateCommissions(DateTime dateTime)
+        {
+            if (LastDateTimeCommissionSubtracted == default)
             {
-                creditAccount.LastDateTimeCommissionSubtracted = creditAccount.Transactions.First().DateTime;
+                LastDateTimeCommissionSubtracted = Transactions.First().DateTime;
             }
 
             for (int i = 0; i < AmountOfDays(dateTime); i++)
             {
                 DateTime curDate = LastDateTimeCommissionSubtracted.AddDays(i);
                 Transaction lastTransaction =
-                    creditAccount.Transactions.LastOrDefault(transaction => transaction.DateTime <= curDate);
+                    Transactions.LastOrDefault(transaction => transaction.DateTime <= curDate);
                 if (lastTransaction == null) continue;
                 if (lastTransaction.BalanceAfterTransaction < 0)
                 {
-                    creditAccount.TempCommissionSum += CreditCommission;
+                    TempCommissionSum += CreditCommission;
                 }
             }
 
-            creditAccount.LastDateTimeCommissionSubtracted = dateTime;
+            LastDateTimeCommissionSubtracted = dateTime;
         }
 
-        public void SubtractCommission(decimal commissionSum, DateTime dateTime)
+        private void SubtractCommission(decimal commissionSum, DateTime dateTime)
         {
             var transaction = new CreditWithdrawTransaction(dateTime, commissionSum, this);
             transaction.Commit();

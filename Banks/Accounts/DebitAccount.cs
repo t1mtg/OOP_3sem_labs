@@ -11,9 +11,17 @@ namespace Banks.Accounts
         {
         }
 
+        public decimal DebitPercent { get; set; }
         public DateTime LastDateTimeInterestAdded { get; set; } = default;
 
-        public void CalculatePercents(DateTime dateTime, decimal percents)
+        public override void PayPercents(DateTime dateTime)
+        {
+            CalculatePercents(dateTime, DebitPercent);
+            AddInterest(TempInterestSum, dateTime);
+            TempInterestSum = decimal.Zero;
+        }
+
+        private void CalculatePercents(DateTime dateTime, decimal percents)
         {
             if (LastDateTimeInterestAdded == default)
             {
@@ -33,7 +41,7 @@ namespace Banks.Accounts
             LastDateTimeInterestAdded = dateTime;
         }
 
-        public void AddInterest(decimal interestSum, DateTime dateTime)
+        private void AddInterest(decimal interestSum, DateTime dateTime)
         {
             var transaction = new RefillTransaction(dateTime, interestSum, this);
             transaction.Commit();
