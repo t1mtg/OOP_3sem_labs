@@ -22,12 +22,12 @@ namespace BackupsExtra
         {
             switch (settings.StorageTypeConfig)
             {
-                case StorageTypeConfig.Single:
+                case StorageTypeConfig.SingleStorage:
                     var fileSystemSingle = new FileSystemSingle(_listOfJobObjects);
                     fileSystemSingle.Archivate(settings.FileSystemConfig, numberOfRestorePoint, pathToSave);
                     _listOfStorages.AddRange(fileSystemSingle.GetStorages());
                     return fileSystemSingle.GetStorages();
-                case StorageTypeConfig.Split:
+                case StorageTypeConfig.SplitStorage:
                     var fileSystemSplit = new FileSystemSplit(_listOfJobObjects);
                     fileSystemSplit.Archivate(settings.FileSystemConfig, numberOfRestorePoint, pathToSave);
                     _listOfStorages.AddRange(fileSystemSplit.GetStorages());

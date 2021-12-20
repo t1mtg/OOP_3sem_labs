@@ -10,8 +10,8 @@ namespace BackupsExtra
 
     public enum StorageTypeConfig
     {
-        Split,
-        Single,
+        SplitStorage,
+        SingleStorage,
     }
 
     public class RestorePointCreationSettings

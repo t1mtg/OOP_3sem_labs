@@ -58,13 +58,13 @@ namespace BackupsExtra.Tests
             _cleaner = new Cleaner(new AmountLimit(_backupJob.GetRestorePoints(), 2));
             RestorePoint firstRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             RestorePoint secondRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             RestorePoint thirdRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             Cleaner.Clean(_backupJob.GetRestorePoints(), FileSystemConfig.Tests);
             Assert.AreEqual(_backupJob.GetRestorePoints().Count, 2);
         }
@@ -75,11 +75,11 @@ namespace BackupsExtra.Tests
             _cleaner = new Cleaner(new DateLimit(_backupJob.GetRestorePoints(), DateTime.Now.AddSeconds(2)));
             RestorePoint firstRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             System.Threading.Thread.Sleep(3000);
             RestorePoint secondRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             Cleaner.Clean(_backupJob.GetRestorePoints(), FileSystemConfig.Tests);
             Assert.AreEqual(_backupJob.GetRestorePoints().Count, 1);
         }
@@ -92,14 +92,14 @@ namespace BackupsExtra.Tests
                 new AmountLimit(_backupJob.GetRestorePoints(), 2), HybridType.All));
             RestorePoint firstRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             System.Threading.Thread.Sleep(5000);
             RestorePoint secondRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             RestorePoint thirdRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             Cleaner.Clean(_backupJob.GetRestorePoints(), FileSystemConfig.Tests);
             Assert.AreEqual(_backupJob.GetRestorePoints().Count, 2);
             
@@ -113,17 +113,17 @@ namespace BackupsExtra.Tests
                 new AmountLimit(_backupJob.GetRestorePoints(), 2), HybridType.Any));
             RestorePoint firstRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             System.Threading.Thread.Sleep(5000);
             RestorePoint secondRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             RestorePoint thirdRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             RestorePoint fourthRestorePoint = _backupJob
                 .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository,
-                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                    new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             Cleaner.Clean(_backupJob.GetRestorePoints(), FileSystemConfig.Tests);
             Assert.AreEqual(_backupJob.GetRestorePoints().Count, 2);
         }

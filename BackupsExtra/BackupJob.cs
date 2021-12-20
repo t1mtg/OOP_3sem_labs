@@ -67,7 +67,7 @@ namespace BackupsExtra
             switch (restoreLocation)
             {
                 case RestoreLocation.Original:
-                    restorePath = restorePoint.Object.Files.First();
+                    restorePath = restorePoint.JobObject.Files.First();
                     restorePath = restorePath[..restorePath.LastIndexOf(Path.DirectorySeparatorChar)];
                     break;
                 case RestoreLocation.Different:

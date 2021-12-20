@@ -20,7 +20,7 @@ namespace BackupsExtra
             var backupJob = new BackupJob(new JobObject(files), logger);
             var repository = new FileSystemRepository(files);
             RestorePoint restorePoint = backupJob
-                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Tests));
+                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
             foreach (string file in files)
             {
                 File.Delete(file);
@@ -37,11 +37,11 @@ namespace BackupsExtra
             // merge test
             var cleaner = new Cleaner(new AmountLimit(backupJob.GetRestorePoints(), 2));
             RestorePoint restorePoint0 = backupJob
-                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Folder));
+                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Folder));
             RestorePoint restorePoint1 = backupJob
-                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Folder));
+                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Folder));
             RestorePoint restorePoint2 = backupJob
-                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.Split, FileSystemConfig.Folder));
+                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Folder));
             restorePoint1.RemoveLastFile();
             restorePoint2.RemoveLastFile();
             Cleaner.Clean(new List<RestorePoint>()

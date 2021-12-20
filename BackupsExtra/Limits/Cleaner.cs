@@ -36,14 +36,14 @@ namespace BackupsExtra.Limits
                     {
                         switch (restorePoint.Settings.StorageTypeConfig)
                         {
-                            case StorageTypeConfig.Single:
+                            case StorageTypeConfig.SingleStorage:
                                 foreach (string file in restorePoint.Storages)
                                 {
                                     Directory.Delete(file[..file.LastIndexOf(Path.DirectorySeparatorChar)], true);
                                 }
 
                                 break;
-                            case StorageTypeConfig.Split:
+                            case StorageTypeConfig.SplitStorage:
                                 string firstFile = restorePoint.Storages[0];
                                 Directory.Delete(firstFile[..firstFile.LastIndexOf(Path.DirectorySeparatorChar)], true);
                                 break;
@@ -81,8 +81,8 @@ namespace BackupsExtra.Limits
 
         public static void MergeRestorePoints(RestorePoint newRestorePoint, RestorePoint oldRestorePoint)
         {
-            if (newRestorePoint.Settings.StorageTypeConfig == StorageTypeConfig.Single ||
-                oldRestorePoint.Settings.StorageTypeConfig == StorageTypeConfig.Single)
+            if (newRestorePoint.Settings.StorageTypeConfig == StorageTypeConfig.SingleStorage ||
+                oldRestorePoint.Settings.StorageTypeConfig == StorageTypeConfig.SingleStorage)
             {
                 Clean(
                     new List<RestorePoint>()
