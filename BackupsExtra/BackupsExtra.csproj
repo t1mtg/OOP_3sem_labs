@@ -13,13 +13,35 @@
 
   <ItemGroup>
     <None Include="..\.editorconfig" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.28.23 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.27.41 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.24.56 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.24.34 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.23.41 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.22.52 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.22.47 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.22.26 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.22.08 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.21.02 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.20.42 PM.zip" />
+    <None Remove="RestorePoint0\RestorePoint0_12.11.2021 5.18.57 PM.zip" />
+    <None Remove="logs.txt" />
+    <None Remove="4321.txt" />
+    <None Remove="1234.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="BackupException.cs" />
+    <Compile Remove="StorageConfig.cs" />
   </ItemGroup>
 
 </Project>
