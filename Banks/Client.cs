@@ -4,7 +4,7 @@ using Banks.Accounts;
 
 namespace Banks
 {
-    public class Client
+    public class Client : IObserver
     {
         public Client()
         {
@@ -17,11 +17,14 @@ namespace Banks
         public string Address { get; set; }
         public string Passport { get; set; }
         public List<Account> Accounts { get; }
+        public List<INotification> Notifications { get; }
         public bool Verified => !string.IsNullOrEmpty(Address) && !string.IsNullOrEmpty(Passport);
         public static ClientBuilder Builder(string name) => new ClientBuilder().SetName(name);
-        public static void GetUpdate(string message)
+
+        public void Update(INotification notification)
         {
-            Console.WriteLine(message);
+            Notifications.Add(notification);
+            notification.GetMessage();
         }
     }
 }

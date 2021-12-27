@@ -19,7 +19,7 @@ namespace Banks.Accounts
         public Guid Id { get; }
         public bool ClientSubscribed { get; set; }
         public decimal TempInterestSum { get; set; }
-        public int UnverifiedLimit { get; }
+        public int UnverifiedLimit { get; set; }
         public List<Transaction> Transactions { get; }
 
         public void UpdateBalance(decimal transactionSum)

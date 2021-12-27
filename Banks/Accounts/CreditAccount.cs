@@ -13,7 +13,7 @@ namespace Banks.Accounts
             CreditCommission = commission;
         }
 
-        public decimal BelowZeroLimit { get; }
+        public decimal BelowZeroLimit { get; set; }
         public DateTime LastDateTimeCommissionSubtracted { get; set; } = default;
         public decimal TempCommissionSum { get; set; }
         public decimal CreditCommission { get; set; }

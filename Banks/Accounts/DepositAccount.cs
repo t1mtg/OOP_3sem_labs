@@ -15,7 +15,7 @@ namespace Banks.Accounts
         }
 
         public decimal DepositSum { get; }
-        public InterestRates InterestRates { get; }
+        public InterestRates InterestRates { get; set; }
         public DateTime LastDateTimeInterestAdded { get; set; } = default;
         public DateTime DepositExpirationDate { get; }
 

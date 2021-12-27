@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Banks.Accounts;
+using Banks.Notifications;
 
 namespace Banks
 {
-    public class Bank
+    public class Bank : IObservable
     {
         public Bank(string name, decimal debitPercent, int unverifiedLimit, int creditBelowZeroLimit, decimal creditCommission, InterestRates interestRates)
         {
@@ -17,6 +18,7 @@ namespace Banks
             CreditBelowZeroLimit = creditBelowZeroLimit;
             CreditCommission = creditCommission;
             InterestRates = interestRates;
+            Observers = new List<IObserver>();
         }
 
         public List<Account> Accounts { get; }
@@ -28,6 +30,7 @@ namespace Banks
         public decimal DebitPercent { get; set; }
 
         private InterestRates InterestRates { get; set; }
+        private List<IObserver> Observers { get; set; }
 
         public DebitAccount AddNewDebitAccount(Client client)
         {
@@ -40,7 +43,8 @@ namespace Banks
 
         public DepositAccount AddNewDepositAccount(Client client, DateTime depositExpirationDate, int depositSum, InterestRates interestRates)
         {
-            var depositAccount = new DepositAccount(client, UnverifiedLimit, depositExpirationDate, depositSum, interestRates);
+            var depositAccount =
+                new DepositAccount(client, UnverifiedLimit, depositExpirationDate, depositSum, interestRates);
             depositAccount.UpdateBalance(depositSum);
             Accounts.Add(depositAccount);
             client.Accounts.Add(depositAccount);
@@ -55,48 +59,48 @@ namespace Banks
             return creditAccount;
         }
 
-        public void ChangeDebitInterestRate(decimal newInterestRate)
-        {
-            DebitPercent = newInterestRate;
-            Accounts.Where(account => account.ClientSubscribed && account is DebitAccount)
-                .Select(account => account.Owner)
-                .ToList()
-                .ForEach(_ => Client.GetUpdate($"Debit interest rate changed. New value: {newInterestRate}"));
-        }
-
         public void ChangeCreditCommission(decimal newCommission)
         {
             CreditCommission = newCommission;
-            Accounts.Where(account => account.ClientSubscribed && account is CreditAccount)
-                .Select(account => account.Owner)
-                .ToList()
-                .ForEach(_ => Client.GetUpdate($"Credit commission changed. New value: {newCommission}"));
+            foreach (CreditAccount creditAccount in Accounts.OfType<CreditAccount>())
+            {
+                creditAccount.CreditCommission = newCommission;
+            }
+
+            NotifySubscribers(new CreditCommissionNotification(newCommission));
         }
 
         public void ChangeUnverifiedLimit(int newLimit)
         {
-            Accounts.Where(account => account.ClientSubscribed && !account.Owner.Verified)
-                .Select(account => account.Owner)
-                .ToList()
-                .ForEach(_ => Client.GetUpdate($"Unverified limit changed. New value: {newLimit}"));
+            UnverifiedLimit = newLimit;
+            foreach (Account account in Accounts)
+            {
+                account.UnverifiedLimit = newLimit;
+            }
+
+            NotifySubscribers(new UnverifiedLimitNotification(newLimit));
         }
 
         public void ChangeCreditBelowZeroLimit(int newLimit)
         {
             CreditBelowZeroLimit = newLimit;
-            Accounts.Where(account => account.ClientSubscribed && account is CreditAccount)
-                .Select(account => account.Owner)
-                .ToList()
-                .ForEach(_ => Client.GetUpdate($"Credit below zero changed. New value: {newLimit}"));
+            foreach (CreditAccount creditAccount in Accounts.OfType<CreditAccount>())
+            {
+                creditAccount.BelowZeroLimit = newLimit;
+            }
+
+            NotifySubscribers(new CreditBelowZeroNotification(newLimit));
         }
 
         public void ChangeInterestRates(InterestRates newInterestRates)
         {
             InterestRates = newInterestRates;
-            Accounts.Where(account => account.ClientSubscribed && account is CreditAccount)
-                .Select(account => account.Owner)
-                .ToList()
-                .ForEach(_ => Client.GetUpdate($"Interest rates changed."));
+            foreach (DepositAccount depositAccount in Accounts.OfType<DepositAccount>())
+            {
+                depositAccount.InterestRates = newInterestRates;
+            }
+
+            NotifySubscribers(new InterestRateNotification(newInterestRates));
         }
 
         public void PayInterestsAndCommissions(DateTime dateTime)
@@ -104,6 +108,24 @@ namespace Banks
             foreach (Account account in Accounts)
             {
                 account.PayPercents(dateTime);
+            }
+        }
+
+        public void AddObserver(IObserver observer)
+        {
+            Observers.Add(observer);
+        }
+
+        public void RemoveObserver(IObserver observer)
+        {
+            Observers.Remove(observer);
+        }
+
+        public void NotifySubscribers(INotification notification)
+        {
+            foreach (IObserver observer in Observers)
+            {
+                observer.Update(notification);
             }
         }
     }
