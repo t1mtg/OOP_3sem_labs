@@ -4,10 +4,10 @@ using Banks.Exceptions;
 
 namespace Banks.Transactions
 {
-    public class DebitTransferTransaction : Transaction
+    public class WithdrawTransaction : Transaction
     {
-        public DebitTransferTransaction(DateTime dateTime, decimal transactionSum, Account sourceAccount, Account destinationAccount)
-            : base(dateTime, transactionSum, sourceAccount, destinationAccount)
+        public WithdrawTransaction(DateTime dateTime, decimal transactionSum, Account sourceAccount)
+            : base(dateTime, transactionSum, sourceAccount)
         {
         }
 
@@ -18,13 +18,7 @@ namespace Banks.Transactions
                 throw new OperationIsAlreadyCancelledException();
             }
 
-            if (!SourceAccount.Owner.Verified && TransactionSum > SourceAccount.UnverifiedLimit)
-            {
-                throw new AccountUnverifiedException();
-            }
-
             SourceAccount.UpdateBalance(-TransactionSum);
-            DestinationAccount.UpdateBalance(TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
             SourceAccount.Transactions.Add(this);
         }
@@ -36,9 +30,8 @@ namespace Banks.Transactions
                 throw new OperationIsAlreadyCancelledException();
             }
 
-            SourceAccount.UpdateBalance(-TransactionSum);
+            SourceAccount.UpdateBalance(TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
-            DestinationAccount.UpdateBalance(TransactionSum);
             SourceAccount.Transactions.Add(this);
         }
     }

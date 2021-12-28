@@ -18,11 +18,6 @@ namespace Banks.Transactions
                 throw new OperationIsAlreadyCancelledException();
             }
 
-            if (TransactionSum < 0)
-            {
-                throw new TransactionSumLessThanZeroException();
-            }
-
             SourceAccount.UpdateBalance(TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
             SourceAccount.Transactions.Add(this);

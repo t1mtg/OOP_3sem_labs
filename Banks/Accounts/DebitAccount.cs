@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Banks.Exceptions;
 using Banks.Transactions;
 
 namespace Banks.Accounts
@@ -12,7 +13,49 @@ namespace Banks.Accounts
         }
 
         public decimal DebitPercent { get; set; }
-        public DateTime LastDateTimeInterestAdded { get; set; } = default;
+        private DateTime LastDateTimeInterestAdded { get; set; } = default;
+        public override void Transfer(DateTime dateTime, decimal transactionSum, Account destinationAccount)
+        {
+            if (!Owner.Verified && transactionSum > UnverifiedLimit)
+            {
+                throw new AccountUnverifiedException();
+            }
+
+            if (Balance - transactionSum < 0)
+            {
+                throw new InsufficientBalanceException();
+            }
+
+            var transferTransaction = new TransferTransaction(dateTime, transactionSum, this, destinationAccount);
+            transferTransaction.Commit();
+        }
+
+        public override void Refill(DateTime dateTime, decimal transactionSum)
+        {
+            if (transactionSum < 0)
+            {
+                throw new TransactionSumLessThanZeroException();
+            }
+
+            var refillTransaction = new RefillTransaction(dateTime, transactionSum, this);
+            refillTransaction.Commit();
+        }
+
+        public override void Withdraw(DateTime dateTime, decimal transactionSum)
+        {
+            if (Owner.Verified && transactionSum > UnverifiedLimit)
+            {
+                throw new AccountUnverifiedException();
+            }
+
+            if (transactionSum - Balance > 0)
+            {
+                throw new InsufficientBalanceException();
+            }
+
+            var withdrawTransaction = new WithdrawTransaction(dateTime, transactionSum, this);
+            withdrawTransaction.Commit();
+        }
 
         public override void PayPercents(DateTime dateTime)
         {

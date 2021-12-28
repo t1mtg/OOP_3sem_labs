@@ -31,17 +31,16 @@ namespace Banks.Tests
             _client2 = Client.Builder("Ivan Gurman").SetAddress("Fedora Abramova 8").SetPassport("6969 696969").GetClient();
             _debitAccount1 = _bank.AddNewDebitAccount(_client1);
             _debitAccount2 = _bank.AddNewDebitAccount(_client2);
-            var refillTransaction1 = new RefillTransaction(DateTime.Now, 5000, _debitAccount1);
-            refillTransaction1.Commit();
-            var refillTransaction2 = new RefillTransaction(DateTime.Now, 25000, _debitAccount2);
-            refillTransaction2.Commit();
+            _debitAccount1.Refill(DateTime.Now, 5000);
+            _debitAccount2.Refill(DateTime.Now, 25000);
         }
         
         [Test]
         public void Refill()
         {
-            var refillTransaction4 = new RefillTransaction(DateTime.Now, 19000, _debitAccount1);
-            refillTransaction4.Commit();
+            /*var refillTransaction4 = new RefillTransaction(DateTime.Now, 19000, _debitAccount1);
+            refillTransaction4.Commit();*/
+            _debitAccount1.Refill(DateTime.Now, 19000);
             Assert.AreEqual(24000, _debitAccount1.Balance);
         }
         
@@ -58,18 +57,21 @@ namespace Banks.Tests
         [Test]
         public void Withdraw()
         {
-            var refillTransaction = new RefillTransaction(DateTime.Now, 4321, _debitAccount1);
+            /*var refillTransaction = new RefillTransaction(DateTime.Now, 4321, _debitAccount1);
             refillTransaction.Commit();
             var debitWithdrawTransaction = new DebitWithdrawTransaction(DateTime.Now, 1234, _debitAccount1);
-            debitWithdrawTransaction.Commit();
+            debitWithdrawTransaction.Commit();*/
+            _debitAccount1.Refill(DateTime.Now, 4321);
+            _debitAccount1.Withdraw(DateTime.Now, 1234);
             Assert.AreEqual(8087, _debitAccount1.Balance);
             
         }
         [Test]
         public void Transfer()
         {
-            var debitTransferTransaction = new DebitTransferTransaction(DateTime.Now,2000, _debitAccount1, _debitAccount2);
-            debitTransferTransaction.Commit();
+            /*var debitTransferTransaction = new DebitTransferTransaction(DateTime.Now,2000, _debitAccount1, _debitAccount2);
+            debitTransferTransaction.Commit();*/
+            _debitAccount1.Transfer(DateTime.Now, 2000, _debitAccount2);
             Assert.AreEqual(3000, _debitAccount1.Balance);
             Assert.AreEqual(27000, _debitAccount2.Balance);
         }
@@ -78,10 +80,12 @@ namespace Banks.Tests
         public void SubtractCreditCommission()
         {
             Account creditAccount = _bank.AddNewCreditAccount(_client2);
-            var refillTransaction = new RefillTransaction(DateTime.Now, 1000, creditAccount);
-            refillTransaction.Commit();
-            CreditWithdrawTransaction creditWithdrawTransaction = new(DateTime.Now, 1010, creditAccount);
-            creditWithdrawTransaction.Commit();
+            /*var refillTransaction = new RefillTransaction(DateTime.Now, 1000, creditAccount);
+            refillTransaction.Commit();*/
+            creditAccount.Refill(DateTime.Now, 1000);
+            /*CreditWithdrawTransaction creditWithdrawTransaction = new(DateTime.Now, 1010, creditAccount);
+            creditWithdrawTransaction.Commit();*/
+            creditAccount.Withdraw(DateTime.Now, 1010);
             DateTime fourteenDaysPassed = DateTime.Now.AddDays(14);
             _centralBank.Notify(fourteenDaysPassed);
             Assert.AreEqual(-296, Math.Round(creditAccount.Balance));

@@ -4,10 +4,10 @@ using Banks.Exceptions;
 
 namespace Banks.Transactions
 {
-    public class DepositWithdrawTransaction : Transaction
+    public class TransferTransaction : Transaction
     {
-        public DepositWithdrawTransaction(DateTime dateTime, decimal transactionSum, Account sourceAccount)
-            : base(dateTime, transactionSum, sourceAccount)
+        public TransferTransaction(DateTime dateTime, decimal transactionSum, Account sourceAccount, Account destinationAccount)
+            : base(dateTime, transactionSum, sourceAccount, destinationAccount)
         {
         }
 
@@ -18,22 +18,19 @@ namespace Banks.Transactions
                 throw new OperationIsAlreadyCancelledException();
             }
 
-            if (TransactionSum - SourceAccount.Balance > 0)
-            {
-                throw new InsufficientBalanceException();
-            }
-
             if (!SourceAccount.Owner.Verified && TransactionSum > SourceAccount.UnverifiedLimit)
             {
                 throw new AccountUnverifiedException();
             }
 
-            if (SourceAccount is DepositAccount depositAccount && DateTime < depositAccount.DepositExpirationDate)
+            if (SourceAccount is CreditAccount creditAccount &&
+                SourceAccount.Balance - TransactionSum + creditAccount.BelowZeroLimit < 0)
             {
-                throw new DepositIsNotExpiredException();
+                throw new CreditLimitExceededException();
             }
 
             SourceAccount.UpdateBalance(-TransactionSum);
+            DestinationAccount.UpdateBalance(TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
             SourceAccount.Transactions.Add(this);
         }
@@ -46,6 +43,7 @@ namespace Banks.Transactions
             }
 
             SourceAccount.UpdateBalance(TransactionSum);
+            DestinationAccount.UpdateBalance(-TransactionSum);
             BalanceAfterTransaction = SourceAccount.Balance;
             SourceAccount.Transactions.Add(this);
         }

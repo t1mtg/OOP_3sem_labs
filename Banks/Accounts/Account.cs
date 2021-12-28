@@ -22,6 +22,10 @@ namespace Banks.Accounts
         public int UnverifiedLimit { get; set; }
         public List<Transaction> Transactions { get; }
 
+        public abstract void Transfer(DateTime dateTime, decimal transactionSum, Account destinationAccount);
+        public abstract void Refill(DateTime dateTime, decimal transactionSum);
+        public abstract void Withdraw(DateTime dateTime, decimal transactionSum);
+
         public void UpdateBalance(decimal transactionSum)
         {
             Balance += transactionSum;

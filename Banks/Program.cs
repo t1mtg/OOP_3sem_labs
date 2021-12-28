@@ -142,24 +142,7 @@ namespace Banks
 
             Account chosenDestinationAccount =
                 clients[int.Parse(Console.ReadLine()) - 1].Accounts.First();
-            switch (accType)
-            {
-                case "Debit":
-                    var debitWithdrawTransaction =
-                        new DebitTransferTransaction(DateTime.Now, tranSum, chosenAccount, chosenDestinationAccount);
-                    debitWithdrawTransaction.Commit();
-                    break;
-                case "Deposit":
-                    var depositWithdrawTransaction =
-                        new DepositTransferTransaction(DateTime.Now, tranSum, chosenAccount, chosenDestinationAccount);
-                    depositWithdrawTransaction.Commit();
-                    break;
-                case "Credit":
-                    var creditWithdrawTransaction =
-                        new CreditTransferTransaction(DateTime.Now, tranSum, chosenAccount, chosenDestinationAccount);
-                    creditWithdrawTransaction.Commit();
-                    break;
-            }
+            chosenAccount.Transfer(DateTime.Now, tranSum, chosenDestinationAccount);
 
             Console.WriteLine(
                 $"The transfer was successful. Current balance: {chosenAccount.Balance}\n");
@@ -169,24 +152,7 @@ namespace Banks
         {
             Console.WriteLine("Please enter the amount of money to withdraw:");
             int trSum = int.Parse(Console.ReadLine());
-            switch (accType)
-            {
-                case "Debit":
-                    var debitWithdrawTransaction =
-                        new DebitWithdrawTransaction(DateTime.Now, trSum, chosenAccount);
-                    debitWithdrawTransaction.Commit();
-                    break;
-                case "Deposit":
-                    var depositWithdrawTransaction =
-                        new DepositWithdrawTransaction(DateTime.Now, trSum, chosenAccount);
-                    depositWithdrawTransaction.Commit();
-                    break;
-                case "Withdraw":
-                    var creditWithdrawTransaction =
-                        new CreditWithdrawTransaction(DateTime.Now, trSum, chosenAccount);
-                    creditWithdrawTransaction.Commit();
-                    break;
-            }
+            chosenAccount.Withdraw(DateTime.Now, trSum);
 
             Console.WriteLine(
                 $"The withdrawal was successful. Current balance: {chosenAccount.Balance}\n");
