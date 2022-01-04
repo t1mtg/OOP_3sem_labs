@@ -2,9 +2,9 @@
 
 namespace Backups.Interfaces
 {
-    public abstract class Irepository
+    public interface IRepository
     {
-        public abstract IEnumerable<string> GetStorages();
-        public abstract List<string> Save(Algorithm algorithm, FileSystemConfig config, uint numberOfRestorePoints, string path);
+        public IEnumerable<string> GetStorages();
+        public IEnumerable<string> Save(IAlgorithm algorithm, uint numberOfRestorePoints, string path);
     }
 }

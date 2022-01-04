@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Backups.Archiver;
+
 namespace Backups
 {
     internal class Program
@@ -13,8 +15,9 @@ namespace Backups
             var backup = new Backup();
             BackupJob backupJob = backup.CreateBackupJob(new JobObject(list));
             var fileSystemRepository = new FileSystemRepository(list);
-            backupJob.AddNewRestorePoint(Algorithm.SingleArchive, FileSystemConfig.Folder, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\res", fileSystemRepository);
-            backupJob.AddNewRestorePoint(Algorithm.SingleArchive, FileSystemConfig.Folder, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\res", fileSystemRepository);
+            var archiver = new FolderSplitArchiver();
+            backupJob.AddNewRestorePoint(new SplitStorage(list, archiver), @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\res", fileSystemRepository);
+            backupJob.AddNewRestorePoint(new SplitStorage(list, archiver), @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\res", fileSystemRepository);
         }
     }
 }

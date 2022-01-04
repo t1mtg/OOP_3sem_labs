@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Backups.Archiver;
 using NUnit.Framework;
 
 namespace Backups.Tests
@@ -16,10 +17,11 @@ namespace Backups.Tests
             };
 
             var repository = new FileSystemRepository(objects);
+            var archiver = new TestSplitArchiver();
             BackupJob backupJob = backup.CreateBackupJob(new JobObject(objects));
-            backupJob.AddNewRestorePoint(Algorithm.SplitArchives, FileSystemConfig.Tests, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups", repository);
+            backupJob.AddNewRestorePoint(new SplitStorage(objects, archiver),@"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups", repository);
             backupJob.RemoveObject(@"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups\pic1.png");
-            backupJob.AddNewRestorePoint(Algorithm.SplitArchives, FileSystemConfig.Tests, @"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups", repository);
+            backupJob.AddNewRestorePoint(new SplitStorage(objects, archiver),@"C:\Users\BaHo\Documents\GitHub\t1mtg\Backups", repository);
             Assert.AreEqual(backupJob.GetListOfStorages().Count , 3);
             Assert.AreEqual(backupJob.GetListOfRestorePoints().Count , 2);
         }

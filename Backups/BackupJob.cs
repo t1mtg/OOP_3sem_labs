@@ -18,9 +18,9 @@ namespace Backups
         public uint NumberOfRestorePoints { get; set; }
         public JobObject JobObject { get; }
 
-        public void AddNewRestorePoint(Algorithm algorithm, FileSystemConfig config, string outputDirPath, Irepository repository)
+        public void AddNewRestorePoint(IAlgorithm algorithm, string outputDirPath, IRepository repository)
         {
-            List<string> newStorages = repository.Save(algorithm, config, NumberOfRestorePoints, outputDirPath);
+            IEnumerable<string> newStorages = repository.Save(algorithm, NumberOfRestorePoints, outputDirPath);
             var restorePoint = new RestorePoint(JobObject, newStorages);
             _restorePoints.Add(restorePoint);
             NumberOfRestorePoints++;

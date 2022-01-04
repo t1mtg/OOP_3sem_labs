@@ -4,7 +4,7 @@ using Backups.Interfaces;
 
 namespace Backups
 {
-    public class FileSystemRepository : Irepository
+    public class FileSystemRepository : IRepository
     {
         private readonly List<string> _objects;
         private List<string> _storages;
@@ -18,28 +18,16 @@ namespace Backups
 
         public IReadOnlyList<string> Storages { get; }
 
-        public override IEnumerable<string> GetStorages()
+        public IEnumerable<string> GetStorages()
         {
             return Storages;
         }
 
-        public override List<string> Save(Algorithm algorithm, FileSystemConfig config, uint numberOfRestorePoints, string path)
+        public IEnumerable<string> Save(IAlgorithm algorithm, uint numberOfRestorePoints, string path)
         {
-            switch (algorithm)
-            {
-                case Algorithm.SingleArchive:
-                    var singleStorage = new SingleStorage(_objects);
-                    singleStorage.Archive(config, numberOfRestorePoints, path);
-                    _storages.AddRange(singleStorage.GetArchivedFiles());
-                    return singleStorage.GetArchivedFiles();
-                case Algorithm.SplitArchives:
-                    var splitStorages = new SplitStorage(_objects);
-                    splitStorages.Archive(config, numberOfRestorePoints, path);
-                    _storages.AddRange(splitStorages.GetArchivedFiles());
-                    return splitStorages.GetArchivedFiles();
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(algorithm), algorithm, null);
-            }
+            algorithm.Archive(numberOfRestorePoints, path);
+            _storages.AddRange(algorithm.GetArchivedFiles());
+            return algorithm.GetArchivedFiles();
         }
     }
 }

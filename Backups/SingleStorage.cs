@@ -1,53 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
-using System.Security.Cryptography;
+using Backups.Interfaces;
 
 namespace Backups
 {
-    public class SingleStorage
+    public class SingleStorage : IAlgorithm
     {
-        private readonly List<string> _filePaths;
         private List<string> _archivedFiles = new List<string>();
+        private List<string> _filesToArchivatePaths;
+        private IArchiver _archiver;
 
-        public SingleStorage(List<string> paths)
+        public SingleStorage(List<string> filesToArchivatePaths, IArchiver archiver)
         {
-            _filePaths = paths;
+            _filesToArchivatePaths = filesToArchivatePaths;
+            _archiver = archiver;
         }
 
-        public List<string> GetArchivedFiles()
+        public IEnumerable<string> GetArchivedFiles()
         {
             return _archivedFiles;
         }
 
-        public void Archive(FileSystemConfig config, uint numberOfRestorePoints, string outputDirPath)
+        public void Archive(uint numberOfRestorePoint, string outputDirectoryPath)
         {
-            switch (config)
-            {
-                case FileSystemConfig.Folder:
-                    string archivePath = outputDirPath + @"\" + "restorePoint" + numberOfRestorePoints;
-                    Directory.CreateDirectory(archivePath);
-                    outputDirPath = archivePath + "_" + DateTime.Now.ToString().Replace('/', '.').Replace(':', '.');
-                    Directory.CreateDirectory(outputDirPath);
-                    foreach (string filePath in _filePaths)
-                    {
-                        string fileName = filePath[(filePath.LastIndexOf(@"\", StringComparison.Ordinal) + 1) ..];
-                        File.Copy(filePath, outputDirPath + @"\" + fileName);
-                    }
-
-                    ZipFile.CreateFromDirectory(outputDirPath, outputDirPath + ".zip");
-                    File.Move(outputDirPath + ".zip", archivePath + @"\" + outputDirPath[(outputDirPath.LastIndexOf(@"\", StringComparison.Ordinal) + 1) ..] + ".zip");
-                    _archivedFiles.Add(archivePath + @"\" +
-                                     outputDirPath[(outputDirPath.LastIndexOf(@"\", StringComparison.Ordinal) + 1) ..] +
-                                     ".zip");
-                    Directory.Delete(outputDirPath, true);
-                    return;
-                case FileSystemConfig.Tests:
-                    outputDirPath += @"\" + "restorePoint" + numberOfRestorePoints;
-                    _archivedFiles.Add(outputDirPath);
-                    return;
-            }
+            _archiver.Archive(numberOfRestorePoint, outputDirectoryPath, _archivedFiles, _filesToArchivatePaths);
         }
     }
 }
