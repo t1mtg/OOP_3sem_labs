@@ -11,9 +11,9 @@ namespace Backups
     {
         private List<string> _filesToArchivatePaths;
         private List<string> _archivedFiles;
-        private IArchiver _archiver;
+        private Interfaces.Archiver _archiver;
 
-        public SplitStorage(List<string> filesToArchivatePaths, IArchiver archiver)
+        public SplitStorage(List<string> filesToArchivatePaths, Interfaces.Archiver archiver)
         {
             _filesToArchivatePaths = filesToArchivatePaths;
             _archiver = archiver;
