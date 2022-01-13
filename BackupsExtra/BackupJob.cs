@@ -49,16 +49,13 @@ namespace BackupsExtra
             return RestorePoints;
         }
 
-        public RestorePoint AddRestorePoint(string outputDirectory, FileSystemRepository repository, RestorePointCreationSettings settings)
+        public RestorePoint AddNewRestorePoint(IAlgorithm algorithm, string outputDirPath, IRepository repository)
         {
-            if (settings == null) throw new ArgumentNullException(nameof(settings));
-            var restorePoint = new RestorePoint(
-                JobObject, repository.Save(settings, NumberOfRestorePoint++, outputDirectory), settings.DateTime)
-            {
-                Settings = settings,
-            };
+            IEnumerable<string> newStorages = repository.Save(algorithm, NumberOfRestorePoint, outputDirPath);
+            var restorePoint = new RestorePoint(JobObject, newStorages);
+            restorePoint.Algorithm = algorithm;
             RestorePoints.Add(restorePoint);
-            Logger.Log("Restore Point successfully added.");
+            NumberOfRestorePoint++;
             return restorePoint;
         }
 

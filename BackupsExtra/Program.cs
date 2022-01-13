@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using BackupsExtra.Cleaners;
 using BackupsExtra.Limits;
 using NUnit.Framework;
 
@@ -19,8 +20,8 @@ namespace BackupsExtra
             };
             var backupJob = new BackupJob(new JobObject(files), logger);
             var repository = new FileSystemRepository(files);
-            RestorePoint restorePoint = backupJob
-                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Tests));
+            var archiver = new FolderSplitArchiver();
+            RestorePoint restorePoint = backupJob.AddNewRestorePoint(new SplitStorage(files, archiver), @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\res", repository);
             foreach (string file in files)
             {
                 File.Delete(file);
@@ -35,23 +36,20 @@ namespace BackupsExtra
             Assert.AreEqual(filesCount, 3);
 
             // merge test
-            var cleaner = new Cleaner(new AmountLimit(backupJob.GetRestorePoints(), 2));
-            RestorePoint restorePoint0 = backupJob
-                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Folder));
-            RestorePoint restorePoint1 = backupJob
-                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Folder));
-            RestorePoint restorePoint2 = backupJob
-                .AddRestorePoint(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", repository, new RestorePointCreationSettings(DateTime.Now, StorageTypeConfig.SplitStorage, FileSystemConfig.Folder));
+            var cleaner = new Cleaner(new AmountLimit(backupJob.GetRestorePoints(), 3));
+            RestorePoint restorePoint0 = backupJob.AddNewRestorePoint(new SplitStorage(files, archiver), @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\", repository);
+            RestorePoint restorePoint1 = backupJob.AddNewRestorePoint(new SplitStorage(files, archiver), @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\", repository);
+            RestorePoint restorePoint2 = backupJob.AddNewRestorePoint(new SplitStorage(files, archiver), @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\", repository);
             restorePoint1.RemoveLastFile();
             restorePoint2.RemoveLastFile();
-            Cleaner.Clean(new List<RestorePoint>()
+            cleaner.Clean(new List<RestorePoint>()
             {
                 restorePoint0,
                 restorePoint1,
                 restorePoint2,
             });
             Assert.AreEqual(restorePoint1.Storages.Count, 2);
-            Assert.AreEqual(backupJob.GetRestorePoints().Count, 3);
+            Assert.AreEqual(backupJob.GetRestorePoints().Count, 4);
         }
     }
 }

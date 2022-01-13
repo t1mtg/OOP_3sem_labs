@@ -10,27 +10,27 @@ namespace BackupsExtra.Limits
         Any,
     }
 
-    public class HybridLimit : Limit
+    public class HybridLimit : ILimit
     {
-        public HybridLimit(DateLimit dateLimit, AmountLimit amountLimit, HybridType hybridType)
+        public HybridLimit(ILimit firstLimit, ILimit secondLimit, HybridType hybridType)
         {
-            DateLimit = dateLimit;
-            AmountLimit = amountLimit;
+            FirstLimit = firstLimit;
+            SecondLimit = secondLimit;
             HybridType = hybridType;
         }
 
-        public DateLimit DateLimit { get; }
-        public AmountLimit AmountLimit { get; }
+        public ILimit FirstLimit { get; }
+        public ILimit SecondLimit { get; }
         public HybridType HybridType { get; }
 
-        public override IEnumerable<RestorePoint> GetRestorePointsToRemove()
+        public IEnumerable<RestorePoint> GetRestorePointsToRemove()
         {
             switch (HybridType)
             {
                 case HybridType.All:
-                    return DateLimit.GetRestorePointsToRemove().Intersect(AmountLimit.GetRestorePointsToRemove());
+                    return FirstLimit.GetRestorePointsToRemove().Intersect(SecondLimit.GetRestorePointsToRemove());
                 case HybridType.Any:
-                    return DateLimit.GetRestorePointsToRemove().Union(AmountLimit.GetRestorePointsToRemove());
+                    return FirstLimit.GetRestorePointsToRemove().Union(SecondLimit.GetRestorePointsToRemove());
                 default:
                     return null;
             }

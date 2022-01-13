@@ -5,7 +5,7 @@ using BackupsExtra.Exceptions;
 
 namespace BackupsExtra.Limits
 {
-    public class AmountLimit : Limit
+    public class AmountLimit : ILimit
     {
         public AmountLimit(List<RestorePoint> restorePoints, int amount)
         {
@@ -16,7 +16,7 @@ namespace BackupsExtra.Limits
         public int Amount { get; }
         public List<RestorePoint> RestorePoints { get; }
 
-        public override IEnumerable<RestorePoint> GetRestorePointsToRemove()
+        public IEnumerable<RestorePoint> GetRestorePointsToRemove()
         {
             if (Amount >= RestorePoints.Count)
             {

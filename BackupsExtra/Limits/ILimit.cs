@@ -2,7 +2,7 @@
 
 namespace BackupsExtra.Limits
 {
-    public abstract class Limit
+    public interface ILimit
     {
         public abstract IEnumerable<RestorePoint> GetRestorePointsToRemove();
     }

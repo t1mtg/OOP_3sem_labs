@@ -7,20 +7,19 @@ namespace BackupsExtra
 {
     public class RestorePoint
     {
-        public RestorePoint(JobObject jobJobObject, List<string> storagesPaths, DateTime dateTime)
+        public RestorePoint(JobObject @jobObject, IEnumerable<string> paths)
         {
             Storages = new List<string>();
-            CreationTime = dateTime;
-            JobObject = jobJobObject;
-            Storages.AddRange(storagesPaths);
+            CreationTime = DateTime.Now;
+            JobObject = @jobObject;
+            Storages.AddRange(paths);
         }
 
-        public RestorePoint() { }
+        public DateTime CreationTime { get; }
+        public IAlgorithm Algorithm { get; set; }
+        public List<string> Storages { get; }
 
         public JobObject JobObject { get; }
-        public DateTime CreationTime { get; set; }
-        public List<string> Storages { get; }
-        public RestorePointCreationSettings Settings { get; set; }
 
         public void RemoveLastFile()
         {
