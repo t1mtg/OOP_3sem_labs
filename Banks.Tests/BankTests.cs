@@ -96,7 +96,7 @@ namespace Banks.Tests
         {
             DateTime fourMonthsPassed = DateTime.Now.AddMonths(4);
             _centralBank.Notify(fourMonthsPassed);
-            Assert.AreEqual(5017, Math.Round(_debitAccount1.Balance));
+            Assert.AreEqual(5016, Math.Round(_debitAccount1.Balance));
         }
         
     }
