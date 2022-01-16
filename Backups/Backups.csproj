@@ -23,10 +23,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="nunit.framework, Version=3.12.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
-      <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\assembly\GAC_MSIL\nunit.framework\v4.0_3.12.0.0__2638cd05610744eb\nunit.framework.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
