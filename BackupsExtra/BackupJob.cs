@@ -27,7 +27,7 @@ namespace BackupsExtra
 
         public JobObject JobObject { get; set; }
         public List<RestorePoint> RestorePoints { get; set; }
-        public int NumberOfRestorePoint { get; set; }
+        public uint NumberOfRestorePoint { get; set; }
         public BackupLogger Logger { get; set; }
 
         public static void Save(string path, BackupJob job)

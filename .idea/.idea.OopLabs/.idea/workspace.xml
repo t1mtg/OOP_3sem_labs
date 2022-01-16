@@ -13,10 +13,32 @@
     <projectFile>Backups.Tests/Backups.Tests.csproj</projectFile>
     <projectFile>BackupsExtra.Tests/BackupsExtra.Tests.csproj</projectFile>
     <projectFile>Banks.Tests/Banks.Tests.csproj</projectFile>
+    <projectFile>Reports/Reports.csproj</projectFile>
+    <projectFile>Reports/Reports.DTO/Reports.DTO.csproj</projectFile>
+    <projectFile>Reports/DTO/DTO.csproj</projectFile>
+    <projectFile>Reports/Client/Client.csproj</projectFile>
+    <projectFile profileName="IIS Express">Reports/ReportsService/ReportsService.csproj</projectFile>
+    <projectFile profileName="ReportsService">Reports/ReportsService/ReportsService.csproj</projectFile>
+    <projectFile profileName="IIS Express">Reports/ReportsServer/ReportsServer.csproj</projectFile>
+    <projectFile profileName="ReportsService">Reports/ReportsServer/ReportsServer.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f29c5c5e-610f-487d-a8fc-5247522c3c78" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/BackupsExtra/Archivers/ArchivePathConverter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra.Tests/BackupsExtraTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra.Tests/BackupsExtraTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Algorithm/IAlgorithm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Algorithm/IAlgorithm.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Algorithm/SingleStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Algorithm/SingleStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Algorithm/SplitStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Algorithm/SplitStorage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Archivers/Archiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Archivers/IArchiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Archivers/FolderSingleArchiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Archivers/FolderSingleArchiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Archivers/FolderSplitArchiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Archivers/FolderSplitArchiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Archivers/TestSingleArchiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Archivers/TestSingleArchiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Archivers/TestSplitArchiver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Archivers/TestSplitArchiver.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/BackupJob.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/BackupJob.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Repository/FileSystemRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Repository/FileSystemRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackupsExtra/Repository/IRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BackupsExtra/Repository/IRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +48,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="lab-3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,34 +63,66 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Isu.Tests/IsuServiceTest.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BackupsExtra.Tests/BackupsExtraTest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Downloads/Telegram Desktop/OgnpServiceTest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/3E/String.Comparison.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d8c458e0524a445c88938677f039f0a998578/17/EndpointMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BackupsExtra/Limits/HybridLimit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BackupsExtra/Limits/DateLimit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/234d2bf464644550a041695234c6853554378/A/HttpWebRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BackupsExtra/Limits/AmountLimit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Shops/IShopService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Shops/ShopRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BackupsExtra/Cleaners/TestCleaner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Shops/ProductRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Shops/ShopService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BackupsExtra/Cleaners/Cleaner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/12f8289f40244d719022cb6ef860d1db1bbb78/13A/ResourceInvoker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Shops/Shop.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../Shops/ShopProduct.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/29a328843bdc4762af89c8fdc084c4d68f5778/eb/389ea4fd/Guid.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/BaHo/Documents/GitHub/t1mtg/Backups/SplitStorage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/12f8289f40244d719022cb6ef860d1db1bbb78/11A/ControllerActionInvoker.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f7aabafbabce4ce4a96b0dade776fc4335b78/2F/FileSystem.Windows.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/8B/Guid.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/12f8289f40244d719022cb6ef860d1db1bbb78/10F/ActionMethodExecutor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5179dd1b79f047d0ac657ed8a725efc172600/2c/a1741dc4/JsonSerializerInternalWriter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/nunit/nunit/c933a883ea25263ec575a654dae69fa38000edd9/src/NUnitFramework/framework/Assert.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d392db2fb3d64f4fa564a7b744fc78015f800/ec/6efe67ae/Assert.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/871738c5a62d401fa10cc2deae06cc2d3b378/A/Uri.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b997ce4b621741e6875cc78c527be20d66578/46/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f7aabafbabce4ce4a96b0dade776fc4335b78/23/File.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/234d2bf464644550a041695234c6853554378/11/WebRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bdd96c5f630a45298dacc07d80deb23b29178/A/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/41A/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/3F/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/3A1/StreamWriter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/BaHo/Documents/GitHub/t1mtg/Backups/SplitStorage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Isu/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Tools/ReachMaxAmountException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Tools/IsuException.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Services/IIsuService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/CourseNumber.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/29a328843bdc4762af89c8fdc084c4d68f5778/5e/af4edbd4/Void.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/IsuService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Shops/IShopService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Group.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Shops/ShopRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/BaHo/Documents/GitHub/t1mtg/Shops/Product.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Isu/Student.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Shops/ProductRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Shops/ShopService.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Shops/Shop.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../Shops/ShopProduct.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/29a328843bdc4762af89c8fdc084c4d68f5778/eb/389ea4fd/Guid.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/233/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f7aabafbabce4ce4a96b0dade776fc4335b78/35/FileSystemEnumerator.Windows.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/NotEnoughProductsInShopException.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/8B/Guid.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/ShopException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/ShopNotFoundException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/37cfe05789d842d4a98b4a8764db3fb58f78/4/ZipFile.Create.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/ProductNotFoundException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Tools/NotEnoughMoneyException.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/nunit/nunit/c933a883ea25263ec575a654dae69fa38000edd9/src/NUnitFramework/framework/Assert.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Product.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d392db2fb3d64f4fa564a7b744fc78015f800/ec/6efe67ae/Assert.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../Shops/Customer.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b997ce4b621741e6875cc78c527be20d66578/46/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bacd18b97f034335b560529c2762724c25588/4/Console.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bf35419280714dc1867a5e4a81ef7cb45b978/11/DeveloperExceptionPageMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/29a328843bdc4762af89c8fdc084c4d68f5778/40/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a9771b1b90284496853fbbe4cedf5e2a3e00/3/SwaggerMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/BaHo/Documents/GitHub/t1mtg/Backups/SplitStorage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4d9e81850faf4a539694b7d8467cc130cf88/3/AuthorizationMiddleware.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1xlLr5S8kysifs8t0gImuHoXbxx" />
   <component name="ProjectLevelVcsManager">
@@ -91,7 +145,7 @@
     <property name="settings.editor.selected.configurable" value="SolutionBuilderGeneralOptionsPageId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Project.Isu">
+  <component name="RunManager" selected=".NET Project.BackupsExtra">
     <configuration name="Backups" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -452,6 +506,8 @@
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="Frame#IsuExtra.Tests.OgnpServiceTest.DeleteStudentsFromOgnp_StudentDeleted" memberName="student" />
+        <PinnedItemInfo parentTag="Type#DTO.Report" memberName="Tasks" />
+        <PinnedItemInfo parentTag="Type#DTO.WeeklyReport" memberName="_tasks" />
       </pinned-members>
     </pin-to-top-manager>
   </component>

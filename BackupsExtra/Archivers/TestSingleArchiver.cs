@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
-namespace BackupsExtra
+namespace BackupsExtra.Archivers
 {
-    public class TestSingleArchiver : Archiver
+    public class TestSingleArchiver : IArchiver
     {
-        public override void Archive(int numberOfRestorePoint, string outputDirectoryPath, List<string> archivedFiles, List<string> filesToArchivatePaths)
+        public void Archive(uint numberOfRestorePoint, string outputDirectoryPath, List<string> archivedFiles, List<string> filesToArchivatePaths)
         {
-            string pathToStore = outputDirectoryPath + Path.DirectorySeparatorChar + "RestorePoint" + numberOfRestorePoint;
+            string pathToStore = GetPathToStore(numberOfRestorePoint, outputDirectoryPath);
             archivedFiles.Add(pathToStore);
+        }
+
+        private static string GetPathToStore(uint numberOfRestorePoint, string outputDirectoryPath)
+        {
+            return outputDirectoryPath + Path.DirectorySeparatorChar + "RestorePoint" + numberOfRestorePoint;
         }
     }
 }

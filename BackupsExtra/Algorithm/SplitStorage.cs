@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using BackupsExtra.Archivers;
 
 namespace BackupsExtra
 {
@@ -7,9 +8,9 @@ namespace BackupsExtra
     {
         private List<string> _filesToArchivatePaths;
         private List<string> _archivedFiles;
-        private Archiver _archiver;
+        private IArchiver _archiver;
 
-        public SplitStorage(List<string> filesToArchivatePaths, Archiver archiver)
+        public SplitStorage(List<string> filesToArchivatePaths, IArchiver archiver)
         {
             _filesToArchivatePaths = filesToArchivatePaths;
             _archiver = archiver;
@@ -21,7 +22,7 @@ namespace BackupsExtra
             return _archivedFiles;
         }
 
-        public void Archive(int numberOfRestorePoint, string outputDirectoryPath)
+        public void Archive(uint numberOfRestorePoint, string outputDirectoryPath)
         {
             _archiver.Archive(numberOfRestorePoint, outputDirectoryPath, _archivedFiles, _filesToArchivatePaths);
         }

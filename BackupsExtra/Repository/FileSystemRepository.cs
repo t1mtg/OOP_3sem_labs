@@ -23,7 +23,7 @@ namespace BackupsExtra
             return Storages;
         }
 
-        public IEnumerable<string> Save(IAlgorithm algorithm, int numberOfRestorePoints, string path)
+        public IEnumerable<string> Save(IAlgorithm algorithm, uint numberOfRestorePoints, string path)
         {
             algorithm.Archive(numberOfRestorePoints, path);
             _storages.AddRange(algorithm.GetArchivedFiles());

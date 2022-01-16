@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using BackupsExtra.Archivers;
 using BackupsExtra.Cleaners;
 using BackupsExtra.Limits;
 using NUnit.Framework;

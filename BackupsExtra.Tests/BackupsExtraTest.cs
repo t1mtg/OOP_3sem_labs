@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using BackupsExtra.Archivers;
 using BackupsExtra.Cleaners;
 using BackupsExtra.Limits;
 using NUnit.Framework;
@@ -16,7 +17,7 @@ namespace BackupsExtra.Tests
         private BackupJob _backupJob;
         private FileSystemRepository _repository;
         private ICleaner _cleaner;
-        private Archiver _archiver;
+        private IArchiver _archiver;
 
         [SetUp]
         public void Setup()

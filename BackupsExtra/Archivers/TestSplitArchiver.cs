@@ -3,20 +3,31 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using BackupsExtra.Archivers;
 
 namespace BackupsExtra
 {
-    public class TestSplitArchiver : Archiver
+    public class TestSplitArchiver : IArchiver
     {
-        public override void Archive(int numberOfRestorePoint, string outputDirectoryPath, List<string> archivedFiles, List<string> filesToArchivatePaths)
+        public void Archive(uint numberOfRestorePoint, string outputDirectoryPath, List<string> archivedFiles, List<string> filesToArchivatePaths)
         {
-            string pathToStore = outputDirectoryPath + Path.DirectorySeparatorChar + "RestorePoint" + numberOfRestorePoint;
+            string pathToStore = GetPathToStore(numberOfRestorePoint, outputDirectoryPath);
             int fileNumber = 1;
-            foreach (string fileName in filesToArchivatePaths.Select(PathConvertToName))
+            foreach (string fileName in filesToArchivatePaths.Select(ArchivePathConverter.ConvertPathToName))
             {
-                archivedFiles.Add(pathToStore + Path.DirectorySeparatorChar + fileName + fileNumber + "_" + DateTimeNowToString() + ".zip");
+                archivedFiles.Add(GetArchiveFileName(pathToStore, fileName, fileNumber));
                 fileNumber++;
             }
+        }
+
+        private static string GetArchiveFileName(string pathToStore, string fileName, int fileNumber)
+        {
+            return pathToStore + Path.DirectorySeparatorChar + fileName + fileNumber + "_" + ArchivePathConverter.ConvertDateTimeNowToString() + ".zip";
+        }
+
+        private static string GetPathToStore(uint numberOfRestorePoint, string outputDirectoryPath)
+        {
+            return outputDirectoryPath + Path.DirectorySeparatorChar + "RestorePoint" + numberOfRestorePoint;
         }
     }
 }
