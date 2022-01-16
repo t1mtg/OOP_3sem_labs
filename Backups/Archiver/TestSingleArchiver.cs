@@ -4,12 +4,17 @@ using Backups.Interfaces;
 
 namespace Backups.Archiver
 {
-    public class TestSingleArchiver : Interfaces.Archiver
+    public class TestSingleArchiver : IArchiver
     {
-        public override void Archive(uint numberOfRestorePoint, string outputDirectoryPath, List<string> archivedFiles, List<string> filesToArchivatePaths)
+        public void Archive(uint numberOfRestorePoint, string outputDirectoryPath, List<string> archivedFiles, List<string> filesToArchivatePaths)
         {
-            string pathToStore = outputDirectoryPath + Path.DirectorySeparatorChar + "RestorePoint" + numberOfRestorePoint;
+            string pathToStore = GetPathToStore(numberOfRestorePoint, outputDirectoryPath);
             archivedFiles.Add(pathToStore);
+        }
+
+        private static string GetPathToStore(uint numberOfRestorePoint, string outputDirectoryPath)
+        {
+            return outputDirectoryPath + Path.DirectorySeparatorChar + "RestorePoint" + numberOfRestorePoint;
         }
     }
 }
