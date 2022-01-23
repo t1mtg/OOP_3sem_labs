@@ -10,7 +10,7 @@ namespace Isu
         public Group(string name)
         {
             int res = int.Parse(name[2..]);
-            if (name.Length != 5 || res is <= 99 or >= 500)
+            if (name.Length != 5 || name[0] != 'M' || name[1] != '3' || res is <= 99 or >= 500)
             {
                 throw new InvalidGroupNameException();
             }

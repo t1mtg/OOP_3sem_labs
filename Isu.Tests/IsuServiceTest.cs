@@ -41,18 +41,18 @@ namespace Isu.Tests
         [Test]
         public void CreateGroupWithInvalidName_ThrowException()
         {
-            /*Assert.Catch<InvalidGroupNameException>(() =>
+            Assert.Catch<InvalidGroupNameException>(() =>
             {
                 _isuService.AddGroup("11111");
-            });*/
-            /*Assert.Catch<InvalidGroupNameException>(() =>
+            });
+            Assert.Catch<InvalidGroupNameException>(() =>
             {
                 _isuService.AddGroup("M5343");
             });
             Assert.Catch<InvalidGroupNameException>(() =>
             {
                 _isuService.AddGroup("M5439");
-            });*/
+            });
             Assert.Catch<InvalidGroupNameException>(() =>
             {
                 _isuService.AddGroup("M222");
