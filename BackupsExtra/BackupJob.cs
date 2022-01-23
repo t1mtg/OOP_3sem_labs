@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using BackupsExtra.Exceptions;
 using BackupsExtra.Limits;
+using BackupsExtra.RestoreAlgorithm;
 using Newtonsoft.Json;
 
 namespace BackupsExtra
@@ -59,27 +60,9 @@ namespace BackupsExtra
             return restorePoint;
         }
 
-        public void RestoreFilesFromBackup(RestorePoint restorePoint, RestoreLocation restoreLocation, string restorePath = default)
+        public void RestoreFilesFromBackup(RestorePoint restorePoint, IRestoreAlgorithm restoreAlgorithm, string restorePath = default)
         {
-            switch (restoreLocation)
-            {
-                case RestoreLocation.Original:
-                    restorePath = restorePoint.JobObject.Files.First();
-                    restorePath = restorePath[..restorePath.LastIndexOf(Path.DirectorySeparatorChar)];
-                    break;
-                case RestoreLocation.Different:
-                    if (restorePath == default)
-                    {
-                        throw new IncorrectPathException();
-                    }
-
-                    break;
-            }
-
-            foreach (string path in restorePoint.Storages)
-            {
-                ZipFile.ExtractToDirectory(path, restorePath, true);
-            }
+            restoreAlgorithm.RestoreFilesFromBackup(restorePoint, restorePath);
         }
     }
 }

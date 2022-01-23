@@ -4,6 +4,7 @@ using System.IO;
 using BackupsExtra.Archivers;
 using BackupsExtra.Cleaners;
 using BackupsExtra.Limits;
+using BackupsExtra.RestoreAlgorithm;
 using NUnit.Framework;
 
 namespace BackupsExtra
@@ -31,7 +32,7 @@ namespace BackupsExtra
             int filesCount = Directory
                 .GetFiles(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\test_files").Length;
             Assert.AreEqual(filesCount, 0);
-            backupJob.RestoreFilesFromBackup(restorePoint, RestoreLocation.Original);
+            backupJob.RestoreFilesFromBackup(restorePoint, new OriginalLocationAlgorithm());
             filesCount = Directory
                 .GetFiles(@"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\test_files").Length;
             Assert.AreEqual(filesCount, 3);
