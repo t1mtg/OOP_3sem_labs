@@ -16,7 +16,7 @@ namespace BackupsExtra.Cleaners
 
         public void Clean(List<RestorePoint> restorePoints, bool isNotMerge = true)
         {
-            IEnumerable<RestorePoint> restorePointsToRemove = Limit.GetRestorePointsToRemove();
+            IEnumerable<RestorePoint> restorePointsToRemove = Limit.GetRestorePointsToRemove(restorePoints);
             if (restorePointsToRemove.Count() >= restorePoints.Count && isNotMerge)
             {
                 throw new AllRestorePointsWillBeDeletedException();

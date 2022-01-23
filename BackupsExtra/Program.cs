@@ -38,20 +38,21 @@ namespace BackupsExtra
             Assert.AreEqual(filesCount, 3);
 
             // merge test
-            var cleaner = new Cleaner(new AmountLimit(backupJob.GetRestorePoints(), 3));
+            var cleaner = new Cleaner(new AmountLimit(2));
             RestorePoint restorePoint0 = backupJob.AddNewRestorePoint(new SplitStorage(files, archiver), @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\", repository);
             RestorePoint restorePoint1 = backupJob.AddNewRestorePoint(new SplitStorage(files, archiver), @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\", repository);
             RestorePoint restorePoint2 = backupJob.AddNewRestorePoint(new SplitStorage(files, archiver), @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\", repository);
             restorePoint1.RemoveLastFile();
             restorePoint2.RemoveLastFile();
-            cleaner.Clean(new List<RestorePoint>()
+            var list = new List<RestorePoint>()
             {
                 restorePoint0,
                 restorePoint1,
                 restorePoint2,
-            });
+            };
+            cleaner.Clean(list);
             Assert.AreEqual(restorePoint1.Storages.Count, 2);
-            Assert.AreEqual(backupJob.GetRestorePoints().Count, 4);
+            Assert.AreEqual(list.Count, 2);
         }
     }
 }

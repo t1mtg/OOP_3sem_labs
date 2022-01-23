@@ -6,18 +6,16 @@ namespace BackupsExtra.Limits
 {
     public class DateLimit : ILimit
     {
-        public DateLimit(List<RestorePoint> restorePoints, DateTime dateTime)
+        public DateLimit(DateTime dateTime)
         {
             DateTime = dateTime;
-            RestorePoints = restorePoints;
         }
 
         public DateTime DateTime { get; }
-        public List<RestorePoint> RestorePoints { get; }
 
-        public IEnumerable<RestorePoint> GetRestorePointsToRemove()
+        public IEnumerable<RestorePoint> GetRestorePointsToRemove(List<RestorePoint> restorePoints)
         {
-            return RestorePoints.Where(restorePoint => restorePoint.CreationTime < DateTime).ToList();
+            return restorePoints.Where(restorePoint => restorePoint.CreationTime < DateTime).ToList();
         }
     }
 }

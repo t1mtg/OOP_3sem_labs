@@ -7,23 +7,21 @@ namespace BackupsExtra.Limits
 {
     public class AmountLimit : ILimit
     {
-        public AmountLimit(List<RestorePoint> restorePoints, int amount)
+        public AmountLimit(int amount)
         {
             Amount = amount;
-            RestorePoints = restorePoints;
         }
 
         public int Amount { get; }
-        public List<RestorePoint> RestorePoints { get; }
 
-        public IEnumerable<RestorePoint> GetRestorePointsToRemove()
+        public IEnumerable<RestorePoint> GetRestorePointsToRemove(List<RestorePoint> restorePoints)
         {
-            if (Amount >= RestorePoints.Count)
+            if (Amount >= restorePoints.Count)
             {
                 throw new AllRestorePointsWillBeDeletedException();
             }
 
-            return RestorePoints.Take(RestorePoints.Count - Amount).ToList();
+            return restorePoints.Take(restorePoints.Count - Amount).ToList();
         }
     }
 }

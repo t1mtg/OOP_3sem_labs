@@ -21,7 +21,7 @@ namespace BackupsExtra.Cleaners
 
         public void Clean(List<RestorePoint> restorePoints, bool isNotMerge = true)
         {
-            IEnumerable<RestorePoint> restorePointsToRemove = Limit.GetRestorePointsToRemove();
+            IEnumerable<RestorePoint> restorePointsToRemove = Limit.GetRestorePointsToRemove(restorePoints);
             if (restorePointsToRemove.Count() >= restorePoints.Count && isNotMerge)
             {
                 throw new AllRestorePointsWillBeDeletedException();
@@ -37,13 +37,13 @@ namespace BackupsExtra.Cleaners
 
         public void Merge(List<RestorePoint> restorePoints)
         {
-            IEnumerable<RestorePoint> restorePointsToRemove = Limit.GetRestorePointsToRemove();
+            IEnumerable<RestorePoint> restorePointsToRemove = Limit.GetRestorePointsToRemove(restorePoints);
             if (restorePointsToRemove.Count() >= restorePoints.Count)
             {
                 throw new AllRestorePointsWillBeDeletedException();
             }
 
-            IEnumerable<RestorePoint> restorePointsToSave = restorePoints.Except(Limit.GetRestorePointsToRemove());
+            IEnumerable<RestorePoint> restorePointsToSave = restorePoints.Except(Limit.GetRestorePointsToRemove(restorePoints));
             RestorePoint restorePointToMergeWith = restorePointsToSave.First();
             foreach (RestorePoint restorePoint in restorePointsToRemove)
             {

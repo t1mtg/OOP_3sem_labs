@@ -23,14 +23,14 @@ namespace BackupsExtra.Limits
         public ILimit SecondLimit { get; }
         public HybridType HybridType { get; }
 
-        public IEnumerable<RestorePoint> GetRestorePointsToRemove()
+        public IEnumerable<RestorePoint> GetRestorePointsToRemove(List<RestorePoint> restorePoints)
         {
             switch (HybridType)
             {
                 case HybridType.All:
-                    return FirstLimit.GetRestorePointsToRemove().Intersect(SecondLimit.GetRestorePointsToRemove());
+                    return FirstLimit.GetRestorePointsToRemove(restorePoints).Intersect(SecondLimit.GetRestorePointsToRemove(restorePoints));
                 case HybridType.Any:
-                    return FirstLimit.GetRestorePointsToRemove().Union(SecondLimit.GetRestorePointsToRemove());
+                    return FirstLimit.GetRestorePointsToRemove(restorePoints).Union(SecondLimit.GetRestorePointsToRemove(restorePoints));
                 default:
                     return null;
             }

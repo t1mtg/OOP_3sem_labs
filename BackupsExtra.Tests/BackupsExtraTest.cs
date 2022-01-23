@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using BackupsExtra.Archivers;
 using BackupsExtra.Cleaners;
 using BackupsExtra.Limits;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace BackupsExtra.Tests
 {
@@ -38,7 +35,7 @@ namespace BackupsExtra.Tests
         [Test]
         public void CleanRestorePointsAmountLimit()
         {
-            _cleaner = new TestCleaner(new AmountLimit(_backupJob.GetRestorePoints(), 2));
+            _cleaner = new TestCleaner(new AmountLimit(2));
             RestorePoint firstRestorePoint =
                 _backupJob.AddNewRestorePoint(new SplitStorage(_files, _archiver),
                     @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\res", _repository);
@@ -56,7 +53,7 @@ namespace BackupsExtra.Tests
         [Test]
         public void CleanRestorePointsDateLimit()
         {
-            _cleaner = new TestCleaner(new DateLimit(_backupJob.GetRestorePoints(), DateTime.Now.AddSeconds(2)));
+            _cleaner = new TestCleaner(new DateLimit(DateTime.Now.AddSeconds(2)));
             RestorePoint firstRestorePoint =
                 _backupJob.AddNewRestorePoint(new SplitStorage(_files, _archiver),
                     @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra", _repository);
@@ -72,8 +69,8 @@ namespace BackupsExtra.Tests
         public void CleanRestorePointsHybridLimitAll()
         {
             _cleaner = new TestCleaner(new HybridLimit(
-                new DateLimit(_backupJob.GetRestorePoints(), DateTime.Now.AddSeconds(1)),
-                new AmountLimit(_backupJob.GetRestorePoints(), 2), HybridType.All));
+                new DateLimit(DateTime.Now.AddSeconds(1)),
+                new AmountLimit(2), HybridType.All));
             RestorePoint firstRestorePoint =
                 _backupJob.AddNewRestorePoint(new SplitStorage(_files, _archiver),
                     @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\res", _repository);
@@ -96,8 +93,8 @@ namespace BackupsExtra.Tests
         public void CleanRestorePointsHybridLimitAny()
         {
             _cleaner = new TestCleaner(new HybridLimit(
-                new DateLimit(_backupJob.GetRestorePoints(), DateTime.Now.AddSeconds(4)),
-                new AmountLimit(_backupJob.GetRestorePoints(), 2), HybridType.Any));
+                new DateLimit(DateTime.Now.AddSeconds(4)),
+                new AmountLimit(2), HybridType.Any));
             RestorePoint firstRestorePoint =
                 _backupJob.AddNewRestorePoint(new SplitStorage(_files, _archiver),
                     @"C:\Users\BaHo\Documents\GitHub\t1mtg\BackupsExtra\res", _repository);
