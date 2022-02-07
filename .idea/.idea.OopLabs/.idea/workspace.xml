@@ -13,12 +13,16 @@
     <projectFile>Backups.Tests/Backups.Tests.csproj</projectFile>
     <projectFile>BackupsExtra.Tests/BackupsExtra.Tests.csproj</projectFile>
     <projectFile>Banks.Tests/Banks.Tests.csproj</projectFile>
+    <projectFile>Reports/Reports.csproj</projectFile>
+    <projectFile>Reports/Reports.DTO/Reports.DTO.csproj</projectFile>
+    <projectFile>Reports/DTO/DTO.csproj</projectFile>
+    <projectFile>Reports/Client/Client.csproj</projectFile>
+    <projectFile profileName="IIS Express">Reports/ReportsService/ReportsService.csproj</projectFile>
+    <projectFile profileName="ReportsService">Reports/ReportsService/ReportsService.csproj</projectFile>
+    <projectFile profileName="IIS Express">Reports/ReportsServer/ReportsServer.csproj</projectFile>
+    <projectFile profileName="ReportsService">Reports/ReportsServer/ReportsServer.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f29c5c5e-610f-487d-a8fc-5247522c3c78" name="Changes" comment="fix">
-      <change afterPath="$PROJECT_DIR$/Shops/IShopService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OopLabs/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Isu/IsuService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Isu/IsuService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +32,6 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="348b28c3907c86237600759b7c1b2e4270912c48" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,14 +46,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Isu.Tests/IsuServiceTest.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/Student.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/Group.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/IsuService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/CourseNumber.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/Tools/IsuException.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/Services/IIsuService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Isu/Tools/ReachMaxAmountException.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1xlLr5S8kysifs8t0gImuHoXbxx" />
   <component name="ProjectViewState">
@@ -70,7 +65,7 @@
     <property name="settings.editor.selected.configurable" value="SolutionBuilderGeneralOptionsPageId" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunManager" selected=".NET Project.Isu">
+  <component name="RunManager" selected=".NET Project.BackupsExtra">
     <configuration name="Backups" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -415,6 +410,5 @@
     <MESSAGE value="fix: Exception class and private setter in Student group" />
     <MESSAGE value="fix: ReachMaxAmountException" />
     <MESSAGE value="fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
 </project>
